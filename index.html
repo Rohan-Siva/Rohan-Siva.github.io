@@ -77,7 +77,15 @@
         </aside>
         
         <!-- Main Content -->
-        <main class="main-content">
+        <nav class="content-nav">
+        <ul>
+            <li><a href="#about" class="nav-link active" data-section="about">About</a></li>
+            <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+            <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+            <li><a href="#publications" class="nav-link" data-section="publications">Conference Papers</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
 
             <!-- About Section -->
             <section id="about" class="section">
@@ -101,10 +109,10 @@
                 </div>
             </section>
 
-            <!-- Publications Section -->
+            <!-- Conference Papers Section -->
             <section id="publications" class="section">
                 <div class="section-header">
-                    <h2><span class="highlight">Publications</span></h2>
+                    <h2><span class="highlight">Conference Papers</span></h2>
                 </div>
                 <div class="section-content">
                     <div class="publications-list">
@@ -127,75 +135,6 @@
         </main>
     </div>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section bg-dark">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-grid">
-                <!-- Experience items will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="section">
-        <div class="container">
-            <h2 class="section-title">Publications</h2>
-            <div class="publications-list">
-                <!-- Publications will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section bg-dark">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <!-- Project cards will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:rohansiva@utexas.edu">rohansiva@utexas.edu</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin-in"></i>
-                        <a href="https://www.linkedin.com/in/rohan-siva" target="_blank">linkedin.com/in/rohan-siva</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/Rohan-Siva" target="_blank">github.com/Rohan-Siva</a>
-                    </div>
-                </div>
-                <form id="contact-form" class="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="cta-button">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; <span id="current-year"></span> Rohan Siva. All rights reserved.</p>
