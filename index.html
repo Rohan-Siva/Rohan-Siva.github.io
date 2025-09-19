@@ -3,264 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohan Siva | Portfolio</title>
+    <title>Rohan Siva | AI/ML Researcher & Engineer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <div class="nav-content">
-            <div class="logo">Rohan<span>Siva</span></div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Work Experience</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Hi, I'm <span class="highlight">Rohan Siva</span></h1>
-            <p class="tagline">ECE Honors Student & AI Researcher @ UT Austin</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn">View My Work</a>
-                <a href="#contact" class="btn btn-outline">Contact Me</a>
-            </div>
-        </div>
-        <div class="scroll-down">
-            <span>Scroll Down</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-
-    <section id="about" class="section">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>I'm pursuing a B.S. in ECE Honors with a Minor in Statistics & Data Science at the University of Texas at Austin, expected to graduate in June 2027. I'm passionate about AI/ML research and building impactful technology.</p>
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <!-- Placeholder for profile image -->
+                    <div class="image-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <h1 class="name">Rohan Siva</h1>
+                <h2 class="title">AI/ML Researcher & Engineer</h2>
                 
-                <h3>Education</h3>
-                <p><strong>University of Texas at Austin</strong><br>
-                B.S. in Electrical and Computer Engineering (Honors)<br>
-                Minor in Statistics & Data Science<br>
-                Expected Graduation: June 2027</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:rohansiva@utexas.edu">rohansiva@utexas.edu</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>669-294-7436</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin-in"></i>
+                        <a href="https://www.linkedin.com/in/rohan-siva" target="_blank">linkedin.com/in/rohan-siva</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/Rohan-Siva" target="_blank">github.com/Rohan-Siva</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <a href="https://scholar.google.com/citations?user=Ykx0CEUAAAAJ&hl=en" target="_blank">Google Scholar</a>
+                    </div>
+                </div>
                 
-                <p><strong>Relevant Coursework:</strong> Data Structures, Machine Learning, Probability & Statistics, Embedded Systems, Circuit Theory, Linear Algebra, Differential Equations, Discrete Math, Calculus I-III</p>
+                <div class="education">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <h4>University of Texas at Austin</h4>
+                        <p>B.S. in ECE Honors</p>
+                        <p>Minor in Stats & Data Science</p>
+                        <p>GPA: 4.0/4.0</p>
+                        <p class="date">Expected June 2027</p>
+                    </div>
+                </div>
                 
                 <div class="skills">
                     <h3>Technical Skills</h3>
-                    <div class="skill-tags">
-                        <span>Python</span>
-                        <span>Java</span>
-                        <span>C/C++</span>
-                        <span>JavaScript</span>
-                        <span>PyTorch</span>
-                        <span>TensorFlow</span>
-                        <span>Transformers</span>
-                        <span>LLMs</span>
-                        <span>Computer Vision</span>
-                        <span>NLP</span>
-                        <span>Docker</span>
-                        <span>Kubernetes</span>
-                        <span>AWS</span>
-                        <span>Git</span>
-                        <span>React.js</span>
-                        <span>Node.js</span>
-                        <span>FastAPI/Flask</span>
-                        <span>PostgreSQL</span>
+                    <div class="skills-category">
+                        <h4>Languages</h4>
+                        <p>Python, Java, C, C++, JavaScript, R, SQL</p>
+                    </div>
+                    <div class="skills-category">
+                        <h4>AI/ML</h4>
+                        <p>PyTorch, TensorFlow, Sklearn, Transformers, LangChain</p>
+                    </div>
+                    <div class="skills-category">
+                        <h4>Tools</h4>
+                        <p>Git, Docker, AWS, PostgreSQL, React, Node.js, FastAPI</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </aside>
+        
+        <!-- Main Content -->
+        <nav class="content-nav">
+        <ul>
+            <li><a href="#about" class="nav-link active" data-section="about">About</a></li>
+            <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+            <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+            <li><a href="#publications" class="nav-link" data-section="publications">Conference Papers</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
 
-    <section id="experience" class="section">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">May 2025 - Present</div>
-                    <h3>Machine Learning Intern</h3>
-                    <h4>Cisco</h4>
-                    <ul class="timeline-details">
-                        <li>Developed kRAIG, an AI agent converting natural language into executable Kubeflow Pipelines for ETL workflows, achieving 100% pipeline success and 91.7% component accuracy using Claude 3.7 with grounded prompting</li>
-                        <li>Built a production-ready FastAPI microservice with data validation and high-speed crawling (200+ URLs/sec)</li>
-                        <li>Integrated agent with PostgreSQL & S3 via tool calling (MCP), enabling automated ETL into enterprise data storages</li>
-                        <li>Enhanced the system with a RAG-based pipeline generator using Elasticsearch & safety guardrails for database operations</li>
-                        <li>Designed an evaluation framework with variance analysis across 6 model variants, improving pipeline success rate from 0% to 100% while reducing variance to 18%</li>
-                    </ul>
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="section-header">
+                    <h2><span class="highlight">About Me</span></h2>
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">Sep 2025</div>
-                    <h3>Machine Learning Engineer (Contract)</h3>
-                    <h4>Mercor AI</h4>
-                    <ul class="timeline-details">
-                        <li>Developed plan–code pairs for ML engineering tasks from Kaggle competitions with verifiable outputs within task specs</li>
-                        <li>Automated data generation pipeline and preprocessing, producing structured supervision signals for model training</li>
-                        <li>Improved training and data generation efficiency by 50% through scalable dataset construction and validation</li>
-                    </ul>
+                <div class="section-content">
+                    <p>Passionate AI/ML researcher and engineer with experience in developing intelligent systems and machine learning solutions. Currently pursuing my B.S. in Electrical and Computer Engineering at UT Austin, with a focus on AI/ML applications and research.</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">Aug 2024 - Present</div>
-                    <h3>AI Researcher</h3>
-                    <h4>VITA Lab @ UT Austin</h4>
-                    <ul class="timeline-details">
-                        <li>Developed an autonomous driving pipeline that disentangles black-box uncertainty into decision and perception uncertainty scores for targeted interventions (MLSys 2025)</li>
-                        <li>Led fine-tuning (PEFT) of LLaVa multimodal foundation models for autonomous driving using FMDP and conformal prediction, resulting in 5% improvement in task compliance and 40% reduction in decision variability</li>
-                        <li>Built a refinement pipeline using formal verification and active sensing, achieving 95% specification compliance</li>
-                    </ul>
+            <!-- Experience Section -->
+            <section id="experience" class="section">
+                <div class="section-header">
+                    <h2><span class="highlight">Work Experience</span></h2>
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">May 2025 - Present</div>
-                    <h3>AI Researcher</h3>
-                    <h4>PKU Lab @ Peking University</h4>
-                    <ul class="timeline-details">
-                        <li>Leading research on a novel framework for uncertainty-aware multimodal planning by integrating block-by-block diffusion into Chain-of-Thought reasoning, enabling a real-time uncertainty feedback loop based on posterior variance</li>
-                        <li>Designed architecture that replaces autoregressive CoT with diffusion-based generation, reducing latency by up to 34% through parallelizable reasoning and real-time auditing for improved model reliability in VLM-based autonomous driving</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">May 2024 - Oct 2024</div>
-                    <h3>Software Engineering Backend Intern</h3>
-                    <h4>Canyon Technologies LLC</h4>
-                    <ul class="timeline-details">
-                        <li>Developed a cloud-based inventory and display management platform using SpringBoot, Docker, and a REST API</li>
-                        <li>Integrated nxESL tags and BLOZI base stations to enable real-time updates, digital signage, and QR-code label management</li>
-                        <li>Designed and deployed a secure customer mailing system with Java and React.js, enhancing client communication</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">Aug 2024 - Present</div>
-                    <h3>AI Researcher</h3>
-                    <h4>IX (Information eXperience) Lab @ UT Austin</h4>
-                    <ul class="timeline-details">
-                        <li>Built full-stack systems integrating LLMs into interactive information retrieval interfaces using Python, Node.js, and the OpenAI API, enabling real-time query refinement through dynamic user feedback loops</li>
-                        <li>Designed and prototyped multi-pane user interaction flows in Figma to support sequential querying</li>
-                        <li>Evaluated search efficiency and AI-driven assistance models through user-centered interface testing and optimization</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">Nov 2023 - July 2024</div>
-                    <h3>SWE Researcher</h3>
-                    <h4>Keitt Lab @ UT Austin</h4>
-                    <ul class="timeline-details">
-                        <li>Built a low-power sensor mesh using XBee radios and time-synchronized Raspberry Pi nodes with a central communication unit, eliminating the need for Wi-Fi in remote wildlife monitoring locations</li>
-                        <li>Developed an ML-based acoustic detection system to identify bird species and locations from chirp data with real-time sound analysis</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="publications" class="section">
-        <h2 class="section-title">Publications</h2>
-        <div class="publication-item">
-            <h3>Know Where You're Uncertain When Planning with Multimodal Foundation Models: A Formal Framework</h3>
-            <p>Bhatt, N. P., Yang, Y., <strong>Siva, R.</strong>, Milan, D., Topcu, U., & Wang, Z. (2024).</p>
-            <p>Accepted at <strong>MLSys 2025</strong> 🏆 </p>
-            <div class="publication-links">
-                <a href="https://openreview.net/forum?id=HPHrIBlJYw" target="_blank"><i class="fas fa-file-alt"></i> OpenReview</a>
-                <a href="https://arxiv.org/abs/2411.01639" target="_blank"><i class="ai ai-arxiv"></i> arXiv</a>
-                <a href="https://github.com/uncertainty-in-planning/uncertainty-in-planning.github.io" target="_blank"><i class="fab fa-github"></i> Code</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-content">
-                    <h3>MoodScribe</h3>
-                    <p class="project-desc">Real-time AI assistant for Instagram DMs with emotion-aware response generation</p>
-                    <div class="project-meta">
-                        <span class="project-date">Nov 2024</span>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>Flask</span>
-                            <span>LLaMA</span>
-                            <span>Unsloth</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i> View Project
-                        </a>
+                <div class="section-content">
+                    <div class="experience-list">
+                        <!-- Experience items will be populated by JavaScript -->
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="project-card">
-                <div class="project-content">
-                    <h3>Minerva</h3>
-                    <p class="project-desc">AI study assistant with Google Classroom integration and personalized learning</p>
-                    <div class="project-meta">
-                        <span class="project-date">Dec 2024</span>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>React</span>
-                            <span>Flask</span>
-                            <span>OpenAI</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i> View Project
-                        </a>
+            <!-- Conference Papers Section -->
+            <section id="publications" class="section">
+                <div class="section-header">
+                    <h2><span class="highlight">Conference Papers</span></h2>
+                </div>
+                <div class="section-content">
+                    <div class="publications-list">
+                        <!-- Publications will be populated by JavaScript -->
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section id="contact" class="section">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-            <p>I'm always open to discussing new projects, research collaborations, or just chatting about AI and technology!</p>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> <a href="mailto:rohansiva@utexas.edu">rohansiva@utexas.edu</a></p>
-                <p><i class="fas fa-phone"></i> (669) 294-7436</p>
-            </div>
-            <div class="social-links">
-                <a href="https://github.com/Rohan-Siva" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/rohan-siva" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://scholar.google.com/citations?user=Ykx0CEUAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
-                <a href="mailto:rohansiva@utexas.edu" title="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </section>
+            <!-- Projects Section -->
+            <section id="projects" class="section">
+                <div class="section-header">
+                    <h2><span class="highlight">Projects</span></h2>
+                </div>
+                <div class="section-content">
+                    <div class="projects-grid">
+                        <!-- Projects will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <footer>
-        <p>&copy; <span id="year"></span> Rohan Siva. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Rohan Siva. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
