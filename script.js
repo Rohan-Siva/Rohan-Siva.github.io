@@ -9,16 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const experienceData = [
         {
             title: "Machine Learning Intern",
-            company: "Cisco",
+            company: "Cisco Hypershield ML Team",
             logo: "./assets/images/company_logos/cisco.png",
             period: "May 2025 - Present",
             description: [
-                "Developed kRAIG, an AI agent converting natural language into executable Kubeflow Pipelines for ETL workflows, achieving 100% pipeline success and 91.7% component accuracy using Claude 3.7 with grounded prompting",
-                "Built a production-ready FastAPI microservice with data validation and high-speed crawling (200+ URLs/sec)",
-                "Integrated agent with PostgreSQL & S3 via tool calling (MCP), enabling automated ETL into enterprise data storages",
-                "Enhanced the system with a RAG-based pipeline generator using Elasticsearch & safety guardrails for database operations"
+                "Developed kRAIG, an AI agent for Kubeflow Pipelines with 100% success rate using Claude 3.7.",
+                "Built high-performance FastAPI microservices for data processing (200+ reqs/sec)."
             ],
-            skills: ["Python", "FastAPI", "Kubeflow", "PostgreSQL", "Elasticsearch", "AWS S3"]
+            skills: ["Python", "FastAPI", "Kubeflow", "PostgreSQL", "Elasticsearch", "AWS S3"],
+            link: "https://www.cisco.com/site/us/en/products/security/hypershield/index.html"
         },
         {
             title: "AI Researcher",
@@ -26,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/pku.png",
             period: "May 2025 - Present",
             description: [
-                "Leading research on a novel framework for uncertainty-aware multimodal planning by integrating block-by-block diffusion into Chain-of-Thought reasoning, enabling a real-time uncertainty feedback loop based on posterior variance",
-                "Designed architecture that replaces autoregressive CoT with diffusion-based generation, reducing latency by up to 34% through parallelizable reasoning and real-time auditing for improved model reliability in VLM-based autonomous driving"
+                "Leading research on a novel framework for uncertainty-aware multimodal planning by integrating block-by-block diffusion into Chain-of-Thought reasoning, enabling a real-time uncertainty feedback loop based on posterior variance.",
+                "Designed architecture that replaces autoregressive CoT with diffusion-based generation, reducing latency by up to 34% through parallelizable reasoning and real-time auditing for improved model reliability in VLM-based autonomous driving."
             ],
             skills: ["Python", "PyTorch", "Diffusion Models", "Autonomous Systems"]
         },
@@ -37,9 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/utexas.png",
             period: "Aug 2024 - Present",
             description: [
-                "Built full-stack systems integrating LLMs into interactive information retrieval interfaces using Python, Node.js, and the OpenAI API, enabling real-time query refinement through dynamic user feedback loops",
-                "Designed and prototyped multi-pane user interaction flows in Figma to support sequential querying",
-                "Evaluated search efficiency and AI-driven assistance models through user-centered interface testing and optimization"
+                "Built full-stack systems integrating LLMs into interactive information retrieval interfaces using Python, Node.js, and the OpenAI API, enabling real-time query refinement through dynamic user feedback loops.",
+                "Designed and prototyped multi-pane user interaction flows in Figma to support sequential querying."
             ],
             skills: ["Python", "Node.js", "OpenAI API", "Figma", "UX Research"]
         },
@@ -50,8 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             period: "Aug 2024 - Present",
             description: [
                 "Developing an autonomous driving pipeline that disentangles black-box uncertainty into decision and perception uncertainty scores for targeted interventions (MLSys 2025)",
-                "Led fine-tuning (PEFT) of LLaVa multimodal foundation models for autonomous driving using FMDP and conformal prediction, resulting in 5% improvement in task compliance and 40% reduction in decision variability",
-                "Built a refinement pipeline using formal verification and active sensing, achieving 95% specification compliance"
+                "Led fine-tuning (PEFT) of LLaVa multimodal foundation models for autonomous driving using FMDP and conformal prediction, resulting in 5% improvement in task compliance and 40% reduction in decision variability"
             ],
             skills: ["Python", "PyTorch", "LLaVA", "Autonomous Driving", "Formal Methods"]
         },
@@ -62,8 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             period: "Sep 2025",
             description: [
                 "Developed plan–code pairs for ML engineering tasks from Kaggle competitions with verifiable outputs within task specs",
-                "Automated data generation pipeline and preprocessing, producing structured supervision signals for model training",
-                "Improved training and data generation efficiency by 50% through scalable dataset construction and validation"
+                "Automated data generation pipeline and preprocessing, producing structured supervision signals for model training"
             ],
             skills: ["Python", "Machine Learning", "Data Pipeline", "Automation"]
         },
@@ -73,9 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/canyon.jpg",
             period: "May 2024 - Oct 2024",
             description: [
-                "Developed a cloud-based inventory and display management platform using SpringBoot, Docker, and a REST API",
-                "Integrated nxESL tags and BLOZI base stations to enable real-time updates, digital signage, and QR-code label management",
-                "Designed and deployed a secure customer mailing system with Java and React.js, enhancing client communication"
+                "Developed a cloud-based inventory and display management platform using SpringBoot, Docker, and a REST API.",
+                "Integrated nxESL tags and BLOZI base stations to enable real-time updates, digital signage, and QR-code label management."
             ],
             skills: ["Java", "SpringBoot", "Docker", "REST API", "React.js"]
         },
@@ -85,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/utexas.png",
             period: "Nov 2023 - July 2024",
             description: [
-                "Built a low-power sensor mesh using XBee radios and time-synchronized Raspberry Pi nodes with a central communication unit, eliminating the need for Wi-Fi in remote wildlife monitoring locations",
-                "Developed an ML-based acoustic detection system to identify bird species and locations from chirp data with real-time sound analysis"
+                "Built a low-power sensor mesh using XBee radios and time-synchronized Raspberry Pi nodes with a central communication unit, eliminating the need for Wi-Fi in remote wildlife monitoring locations.",
+                "Developed an ML-based acoustic detection system to identify bird species and locations from chirp data with real-time sound analysis."
             ],
             skills: ["Python", "Raspberry Pi", "XBee", "Machine Learning", "Signal Processing"]
         }
@@ -154,7 +149,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const company = document.createElement('span');
             company.className = 'experience-company';
-            company.textContent = exp.company;
+            
+            if (exp.link) {
+                const link = document.createElement('a');
+                link.href = exp.link;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.textContent = exp.company + ' ↗';
+                company.appendChild(link);
+            } else {
+                company.textContent = exp.company;
+            }
             
             const period = document.createElement('span');
             period.className = 'experience-period';
