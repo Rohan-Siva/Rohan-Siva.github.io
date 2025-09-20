@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Experience data
     const experienceData = [
         {
-            title: "Machine Learning Intern",
-            company: "Cisco Hypershield ML Team",
+            title: "Cisco Hypershield ML Team",
+            company: "Machine Learning Intern",
             logo: "./assets/images/company_logos/cisco.png",
             period: "May 2025 - Present",
             description: [
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
             link: "https://ha0tang.github.io/"
         },
         {
-            title: "AI Researcher",
-            company: "IX (Information eXperience) Lab @ UT Austin",
+            title: "IX (Information eXperience) Lab @ UT Austin",
+            company: "AI Researcher",
             logo: "./assets/images/company_logos/utexas.png",
             period: "Aug 2024 - Present",
             description: [
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
             skills: ["Python", "Node.js", "OpenAI API", "Figma", "UX Research"]
         },
         {
-            title: "AI Researcher",
-            company: "Center for Autonomy @ UT Austin",
+            title: "Center for Autonomy @ UT Austin",
+            company: "AI Researcher",
             logo: "./assets/images/company_logos/utexas.png",
             period: "Aug 2024 - Present",
             description: [
@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
             skills: ["Python", "PyTorch", "LLaVA", "Autonomous Driving", "Formal Methods"]
         },
         {
-            title: "Machine Learning Engineer (Contract)",
-            company: "Mercor AI",
+            title: "Mercor AI",
+            company: "Machine Learning Engineer (Contract)",
             logo: "./assets/images/company_logos/mercor.jpeg",
             period: "Sep 2025",
             description: [
@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
             skills: ["Python", "Machine Learning", "Data Pipeline", "Automation"]
         },
         {
-            title: "Software Engineering Backend Intern",
-            company: "Canyon Technologies LLC",
+            title: "Canyon Technologies LLC",
+            company: "Software Engineering Backend Intern",
             logo: "./assets/images/company_logos/canyon.jpg",
             period: "May 2024 - Oct 2024",
             description: [
@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
             skills: ["Java", "SpringBoot", "Docker", "REST API", "React.js"]
         },
         {
-            title: "SWE Researcher",
-            company: "Keitt Lab @ UT Austin",
+            title: "Keitt Lab @ UT Austin",
+            company: "SWE Researcher",
             logo: "./assets/images/company_logos/utexas.png",
             period: "Nov 2023 - July 2024",
             description: [
@@ -132,12 +132,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!experienceList) return;
 
         experienceData.forEach(exp => {
-            const expItem = document.createElement('div');
-            expItem.className = 'experience-item';
+            let expItem;
+            
+            if (exp.link) {
+                const link = document.createElement('a');
+                link.href = exp.link;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'experience-item-link';
+                
+                expItem = document.createElement('div');
+                expItem.className = 'experience-item';
+                
+                const arrowIcon = document.createElement('span');
+                arrowIcon.className = 'experience-arrow';
+                arrowIcon.textContent = '↗';
+                expItem.appendChild(arrowIcon);
+                
+                link.appendChild(expItem);
+                experienceList.appendChild(link);
+            } else {
+                expItem = document.createElement('div');
+                expItem.className = 'experience-item';
+                experienceList.appendChild(expItem);
+            }
             
             const expHeader = document.createElement('div');
             expHeader.className = 'experience-header';
-            
             
             const headerContent = document.createElement('div');
             headerContent.className = 'header-content';
@@ -151,17 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const company = document.createElement('span');
             company.className = 'experience-company';
-            
-            if (exp.link) {
-                const link = document.createElement('a');
-                link.href = exp.link;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                link.textContent = exp.company + ' ↗';
-                company.appendChild(link);
-            } else {
-                company.textContent = exp.company;
-            }
+            company.textContent = exp.company;
             
             const period = document.createElement('span');
             period.className = 'experience-period';
@@ -195,8 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
             expItem.appendChild(expHeader);
             expItem.appendChild(description);
             expItem.appendChild(skills);
-            
-            experienceList.appendChild(expItem);
         });
     }
 

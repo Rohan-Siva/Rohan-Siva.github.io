@@ -683,16 +683,41 @@ img {
 }
 
 .experience-item {
+    position: relative;
     margin-bottom: 20px;
     padding: 16px;
     background: rgba(20, 20, 20, 0.5);
     border-radius: 8px;
     transition: all 0.3s ease;
+    display: block;
+    color: inherit;
+    text-decoration: none;
 }
 
 .experience-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 30, 0.6);
+}
+
+.experience-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.experience-arrow {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: var(--light-slate);
+    font-size: var(--fz-md);
+    transition: transform 0.3s ease;
+}
+
+.experience-item-link:hover .experience-arrow {
+    transform: translate(2px, -2px);
+    color: var(--primary);
 }
 
 .experience-header {
