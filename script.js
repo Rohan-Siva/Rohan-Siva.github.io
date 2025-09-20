@@ -13,22 +13,24 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/cisco.png",
             period: "May 2025 - Present",
             description: [
-                "Developed kRAIG, an AI agent for Kubeflow Pipelines with 100% success rate using Claude 3.7.",
-                "Built high-performance FastAPI microservices for data processing (200+ reqs/sec)."
+                "Member of the Cisco Hypershield ML Team, working on cutting-edge AI/ML solutions for cybersecurity ↗",
+                "Developed kRAIG, an AI agent for Kubeflow Pipelines using Claude 3.7.",
+                "Built high-performance FastAPI microservices for data processing."
             ],
             skills: ["Python", "FastAPI", "Kubeflow", "PostgreSQL", "Elasticsearch", "AWS S3"],
             link: "https://www.cisco.com/site/us/en/products/security/hypershield/index.html"
         },
         {
-            title: "AI Researcher",
-            company: "PKU Lab @ Peking University",
+            title: "PKU Lab @ Peking University",
+            company: "AI Researcher",
             logo: "./assets/images/company_logos/pku.png",
             period: "May 2025 - Present",
             description: [
-                "Leading research on a novel framework for uncertainty-aware multimodal planning by integrating block-by-block diffusion into Chain-of-Thought reasoning, enabling a real-time uncertainty feedback loop based on posterior variance.",
-                "Designed architecture that replaces autoregressive CoT with diffusion-based generation, reducing latency by up to 34% through parallelizable reasoning and real-time auditing for improved model reliability in VLM-based autonomous driving."
+                "Conducted research on uncertainty-aware multimodal planning using block-by-block diffusion in Chain-of-Thought reasoning.",
+                "Designed architecture for diffusion-based generation to enhance model reliability in VLM-based autonomous driving."
             ],
-            skills: ["Python", "PyTorch", "Diffusion Models", "Autonomous Systems"]
+            skills: ["Python", "PyTorch", "Diffusion Models", "Autonomous Systems"],
+            link: "https://ha0tang.github.io/"
         },
         {
             title: "AI Researcher",
@@ -36,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/utexas.png",
             period: "Aug 2024 - Present",
             description: [
-                "Built full-stack systems integrating LLMs into interactive information retrieval interfaces using Python, Node.js, and the OpenAI API, enabling real-time query refinement through dynamic user feedback loops.",
-                "Designed and prototyped multi-pane user interaction flows in Figma to support sequential querying."
+                "Built full-stack systems integrating LLMs into interactive information retrieval interfaces.",
+                "Designed and prototyped multi-pane user interaction flows in Figma for sequential querying."
             ],
             skills: ["Python", "Node.js", "OpenAI API", "Figma", "UX Research"]
         },
@@ -47,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/utexas.png",
             period: "Aug 2024 - Present",
             description: [
-                "Developing an autonomous driving pipeline that disentangles black-box uncertainty into decision and perception uncertainty scores for targeted interventions (MLSys 2025)",
-                "Led fine-tuning (PEFT) of LLaVa multimodal foundation models for autonomous driving using FMDP and conformal prediction, resulting in 5% improvement in task compliance and 40% reduction in decision variability"
+                "Developed an autonomous driving pipeline for uncertainty quantification in decision-making processes (MLSys 2025)",
+                "Led fine-tuning of LLaVa multimodal foundation models for autonomous driving applications"
             ],
             skills: ["Python", "PyTorch", "LLaVA", "Autonomous Driving", "Formal Methods"]
         },
@@ -58,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/mercor.jpeg",
             period: "Sep 2025",
             description: [
-                "Developed plan–code pairs for ML engineering tasks from Kaggle competitions with verifiable outputs within task specs",
-                "Automated data generation pipeline and preprocessing, producing structured supervision signals for model training"
+                "Developed plan-code pairs for ML engineering tasks from Kaggle competitions",
+                "Automated data generation and preprocessing pipelines for model training"
             ],
             skills: ["Python", "Machine Learning", "Data Pipeline", "Automation"]
         },
@@ -69,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/canyon.jpg",
             period: "May 2024 - Oct 2024",
             description: [
-                "Developed a cloud-based inventory and display management platform using SpringBoot, Docker, and a REST API.",
-                "Integrated nxESL tags and BLOZI base stations to enable real-time updates, digital signage, and QR-code label management."
+                "Developed a cloud-based inventory and display management platform with SpringBoot and Docker.",
+                "Integrated nxESL tags and BLOZI base stations for real-time updates and digital signage."
             ],
             skills: ["Java", "SpringBoot", "Docker", "REST API", "React.js"]
         },
@@ -80,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo: "./assets/images/company_logos/utexas.png",
             period: "Nov 2023 - July 2024",
             description: [
-                "Built a low-power sensor mesh using XBee radios and time-synchronized Raspberry Pi nodes with a central communication unit, eliminating the need for Wi-Fi in remote wildlife monitoring locations.",
-                "Developed an ML-based acoustic detection system to identify bird species and locations from chirp data with real-time sound analysis."
+                "Built a low-power sensor mesh using XBee radios and Raspberry Pi nodes for remote wildlife monitoring.",
+                "Developed an ML-based acoustic detection system for bird species identification from audio data."
             ],
             skills: ["Python", "Raspberry Pi", "XBee", "Machine Learning", "Signal Processing"]
         }
