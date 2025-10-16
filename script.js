@@ -123,6 +123,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 code: "https://github.com/uncertainty-in-planning/uncertainty-in-planning.github.io",
                 openreview: "https://openreview.net/forum?id=HPHrIBlJYw"
             }
+        },
+        {
+            title: "UNCAP: Uncertainty-Guided Planning Using Natural Language Communication for Cooperative Autonomous Vehicles",
+            authors: "Bhatt, N. P., Li, P., Gupta, K., Siva, R., Milan, D., Hogue, A. T., Chinchali, S. P., Fridovich-Keil, D., Wang, Z., & Topcu, U.",
+            conference: "<span class='conference-highlight'>Submitted to AAMAS</span>",
+            abstract: "This paper introduces UNCAP, a framework for uncertainty-guided planning in cooperative autonomous vehicles using natural language communication. The approach leverages uncertainty quantification to improve coordination and decision-making in multi-agent autonomous driving scenarios.",
+            links: {
+                paper: "https://arxiv.org/abs/2510.12992",
+                code: "https://uncap-project.github.io/"
+            }
+        },
+        {
+            title: "VLN-Zero: Rapid Exploration and Cache-Enabled Neurosymbolic Vision-Language Planning for Zero-Shot Transfer in Robot Navigation",
+            authors: "Bhatt, N. P., Yang, Y., Siva, R., Samineni, P., Milan, D., Wang, Z., & Topcu, U.",
+            conference: "<span class='conference-highlight'>Submitted to ICRA</span>",
+            abstract: "VLN-Zero presents a neurosymbolic approach combining vision-language models with cache-enabled planning for zero-shot robot navigation. The method enables rapid exploration and transfer learning in novel environments without task-specific training.",
+            links: {
+                paper: "https://arxiv.org/abs/2509.18592",
+                code: "https://github.com/VLN-Zero/vln-zero.github.io"
+            }
         }
     ];
 
