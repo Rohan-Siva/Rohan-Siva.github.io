@@ -1,4 +1,37 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.classList.toggle('light-mode', savedTheme === 'light');
+    updateThemeIcon(savedTheme);
+    
+    // Theme toggle click handler
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const isLightMode = htmlElement.classList.toggle('light-mode');
+            const theme = isLightMode ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+            updateThemeIcon(theme);
+        });
+    }
+    
+    // Update theme icon based on current theme
+    function updateThemeIcon(theme) {
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    }
+    
     // Set current year in footer
     const currentYear = document.getElementById('current-year');
     if (currentYear) {
@@ -21,6 +54,18 @@ document.addEventListener('DOMContentLoaded', function() {
             link: "https://www.cisco.com/site/us/en/products/security/hypershield/index.html"
         },
         {
+            title: "Center for Autonomy @ UT Austin",
+            company: "AI Researcher",
+            logo: "./assets/images/company_logos/utexas.png",
+            period: "Aug 2024 - Present",
+            description: [
+                "Developed an autonomous driving pipeline for uncertainty quantification in decision-making processes (MLSys 2025)",
+                "Led fine-tuning of LLaVa multimodal foundation models for autonomous driving applications"
+            ],
+            skills: ["Python", "PyTorch", "LLaVA", "Autonomous Driving", "Formal Methods"],
+            link: "https://autonomy.oden.utexas.edu/"
+        },
+        {
             title: "PKU Lab @ Peking University",
             company: "AI Researcher",
             logo: "./assets/images/company_logos/pku.png",
@@ -36,23 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
             title: "IX (Information eXperience) Lab @ UT Austin",
             company: "AI Researcher",
             logo: "./assets/images/company_logos/utexas.png",
-            period: "Aug 2024 - Present",
+            period: "Aug 2024 - May 2025",
             description: [
                 "Built full-stack systems integrating LLMs into interactive information retrieval interfaces.",
                 "Designed and prototyped multi-pane user interaction flows in Figma for sequential querying."
             ],
             skills: ["Python", "Node.js", "OpenAI API", "Figma", "UX Research"]
-        },
-        {
-            title: "Center for Autonomy @ UT Austin",
-            company: "AI Researcher",
-            logo: "./assets/images/company_logos/utexas.png",
-            period: "Aug 2024 - Present",
-            description: [
-                "Developed an autonomous driving pipeline for uncertainty quantification in decision-making processes (MLSys 2025)",
-                "Led fine-tuning of LLaVa multimodal foundation models for autonomous driving applications"
-            ],
-            skills: ["Python", "PyTorch", "LLaVA", "Autonomous Driving", "Formal Methods"]
         },
         {
             title: "Mercor AI",
@@ -97,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
             technologies: ["Python", "Flask", "LLaMA", "Unsloth", "JavaScript", "HTML/CSS"],
             highlights: [],
             links: {
-                github: "#"
+                code: "https://github.com/Rohan-Siva/MoodScribe"
             }
         },
         {
@@ -106,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             technologies: ["Python", "React", "Flask", "OpenAI API", "LlamaIndex", "Google Classroom API"],
             highlights: [],
             links: {
-                github: "#"
+                code: "https://github.com/JeremyChuah/minerva"
             }
         }
     ];
