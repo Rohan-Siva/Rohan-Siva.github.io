@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Experience data
     const experienceData = [
         {
-            title: "Cisco Hypershield ML Team",
+            title: "Cisco",
             company: "Machine Learning Intern",
             logo: "./assets/images/company_logos/cisco.png",
             period: "May 2025 - Present",
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link: "https://www.cisco.com/site/us/en/products/security/hypershield/index.html"
         },
         {
-            title: "Center for Autonomy @ UT Austin",
+            title: "Center for Autonomy @ UT Austin - Under Professor Atlas Wang and Professor Ufuk Topcu",
             company: "AI Researcher",
             logo: "./assets/images/company_logos/utexas.png",
             period: "Aug 2024 - Present",
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link: "https://autonomy.oden.utexas.edu/"
         },
         {
-            title: "PKU Lab @ Peking University",
+            title: "PKU Lab @ Peking University - Under Professor Hao Tang",
             company: "AI Researcher",
             logo: "./assets/images/company_logos/pku.png",
             period: "May 2025 - Present",
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const projectsData = [
         {
             title: "MoodScribe – AI Social Sidekick",
-            description: "A real-time AI assistant for Instagram DMs with a cyberpunk-themed interface and Flask backend. Integrated Meta API for live chat scraping and deployed emotion-aware NLP models to generate mood-aligned response suggestions.",
+            description: "A real-time AI assistant for Instagram DMs with a cyberpunk-themed interface and Flask backend. Integrated Meta API for live chat scraping and deployed emotion-aware NLP models to generate mood-aligned response suggestions. Fine-tuned on synthetically generated and validated chat data.",
             technologies: ["Python", "Flask", "LLaMA", "Unsloth", "JavaScript", "HTML/CSS"],
             highlights: [],
             links: {
@@ -141,6 +141,24 @@ document.addEventListener('DOMContentLoaded', function() {
             highlights: [],
             links: {
                 code: "https://github.com/JeremyChuah/minerva"
+            }
+        },
+        {
+            title: "Medicina.ai",
+            description: "Web app that uses machine learning to provide users with health risk predictions and insights for conditions like diabetes and heart disease.",
+            technologies: ["Gemini", "Random Forest", "Logistic Regression", "SQL", "Flask", "Python", "JavaScript"],
+            highlights: [],
+            links: {
+                code: "https://github.com/Rohan-Siva/Medicina.ai"
+            }
+        },
+        {
+            title: "Embedded Systems Tag Game",
+            description: "An embedded systems project that recreates a game of tag on an MSPM0G3507 microcontroller. Features include powerups, real-time polling for joystick input, and interactive elements using LEDs, switches, and sound. The game combines hardware-level programming with game logic for dynamic player interactions on a digital map.",
+            technologies: ["MSPM0G3507", "C++", "Code Composer Studio", "ADC/DAC", "GPIO", "Timers/Interrupts", "Hardware Interfacing"],
+            highlights: [],
+            links: {
+                code: "https://github.com/Rohan-Siva/ECE319_TagGame"
             }
         }
     ];

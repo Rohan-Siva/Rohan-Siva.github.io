@@ -1385,6 +1385,11 @@ img {
     gap: 5px;
 }
 
+:root.light-mode .conference-highlight {
+    color: #cc5500;
+    text-shadow: 0 0 5px rgba(204, 85, 0, 0.2);
+}
+
 .publication-links {
     display: flex;
     flex-wrap: wrap;
