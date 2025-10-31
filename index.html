@@ -69,18 +69,27 @@
             </div>
         </aside>
         
-        <!-- Main Content -->
-        <nav class="content-nav">
-        <ul>
-            <li><a href="#about" class="nav-link active" data-section="about">About</a></li>
-            <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
-            <li><a href="#publications" class="nav-link" data-section="publications">Publications</a></li>
-            <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
-        </ul>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-            <i class="fas fa-moon"></i>
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle menu">
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </button>
-    </nav>
+        
+        <!-- Main Content -->
+        <nav class="content-nav" id="main-nav">
+            <ul>
+                <li><a href="#about" class="nav-link active" data-section="about">About</a></li>
+                <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+                <li><a href="#publications" class="nav-link" data-section="publications">Publications</a></li>
+                <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
     <main class="main-content">
 
             <!-- About Section -->
@@ -143,5 +152,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="mobile-menu.js"></script>
 </body>
 </html>
