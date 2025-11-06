@@ -66,6 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
             link: "https://autonomy.oden.utexas.edu/"
         },
         {
+            title: "Statistical Learning & AI Group @ UT Austin - Under Professor Qiang Liu",
+            company: "AI Researcher",
+            logo: "./assets/images/company_logos/utexas.png",
+            period: "Nov 2025 - Present",
+            description: [
+                "Working on GRPO optimization techniques."
+            ],
+            skills: ["Python", "PyTorch", "Reinforcement Learning", "VERL", "Machine Learning"],
+            link: "https://www.cs.utexas.edu/~lqiang/"
+        },
+        {
             title: "PKU Lab @ Peking University - Under Professor Hao Tang",
             company: "AI Researcher",
             logo: "./assets/images/company_logos/pku.png",
@@ -194,6 +205,16 @@ document.addEventListener('DOMContentLoaded', function() {
             links: {
                 paper: "https://arxiv.org/abs/2509.18592",
                 code: "https://github.com/VLN-Zero/vln-zero.github.io"
+            }
+        },
+        {
+            title: "RepV: Safety-Separable Latent Spaces for Scalable Neurosymbolic Plan Verification",
+            authors: "Yang, Y., Bhatt, N. P., Samineni, P., Siva, R., Wang, Z., & Topcu, U.",
+            conference: "<span class='conference-highlight'>Submitted to MLSys</span>",
+            abstract: "RepV introduces a novel framework for safety-verifiable reinforcement learning by learning safety-separable latent spaces that enable efficient neurosymbolic plan verification. The approach combines the representational power of deep learning with the formal guarantees of symbolic methods for scalable safety verification in complex environments.",
+            links: {
+                paper: "https://arxiv.org/abs/2510.26935",
+                code: "https://github.com/RepV-Project/repv-project.github.io"
             }
         }
     ];
