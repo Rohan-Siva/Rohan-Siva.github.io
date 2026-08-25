@@ -65,23 +65,14 @@
               graduating in May 2027.
             </p>
 
-            <p>
-              This summer, I'm working on post-training voice models for CX at <a href="https://decagon.ai/">Decagon</a>.
-              Previously, I was a Machine Learning Intern at <a
-                href="https://www.cisco.com/site/us/en/products/security/hypershield/index.html">Cisco Hypershield</a>
-              working on cybersecurity <a href="https://arxiv.org/abs/2603.20311">data ETL agents</a>.
-              I am also an AI Researcher at the
-              <a href="https://www.vita-group.space/">VITA Lab</a> and
-              <a href="https://autonomy.oden.utexas.edu/Groups/autonomous-systems-group">Center for Autonomy</a> at UT
-              Austin under
-              <a href="https://www.ece.utexas.edu/people/faculty/atlas-wang">Prof. Atlas Wang</a> and
-              <a href="https://oden.utexas.edu/people/directory/ufuk--topcu/">Prof. Ufuk Topcu</a>, focusing on formal
-              methods, neurosymbolic AI, and VLM-based planning.
-              At the <a href="https://www.cs.utexas.edu/~qlearning/">Statistical Learning & AI Group</a>,
-              I work on improving the efficiency of RL algorithms (GRPO/PPO).
-              I also collaborate with <a href="https://ha0tang.github.io/">Prof. Hao Tang</a> at Peking University on
-              diffusion models for parallelizable chain-of-thought reasoning.
-            </p>
+            <ul>
+              <li>
+                <b>Industry:</b> Research Intern at Decagon (Summer 2026) working on voice model <a href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">post-training</a> &amp; <a href="https://decagon.ai/blog/scaling-real-time-tts-inference">inference</a>; MLE Intern at Cisco Hypershield (Summer 2025) working on cybersecurity <a href="https://arxiv.org/abs/2603.20311">data ETL agents</a>.
+              </li>
+              <li>
+                <b>Research:</b> Embodied AI and Formal Methods with Prof. Atlas Wang &amp; Prof. Ufuk Topcu (<a href="https://www.vita-group.space/">VITA Lab</a> &amp; <a href="https://autonomy.oden.utexas.edu/Groups/autonomous-systems-group">Center for Autonomy</a>); Speculative Decoding for GRPO at UT Austin's <a href="https://www.cs.utexas.edu/~qlearning/">Statistical Learning &amp; AI Group</a>; and diffusion models for parallel chain-of-thought reasoning with <a href="https://ha0tang.github.io/">Prof. Hao Tang</a> (PKU).
+              </li>
+            </ul>
 
             <p>
               My research interests include embodied AI, RL, Agents, vision-language models, diffusion models, and mechanistic
@@ -152,7 +143,81 @@
 
       <h2 class="title is-3">Publications</h2>
 
-      <!-- A4D -->
+      <!-- Decagon TTS Inference Blog -->
+      <div class="publication-block columns is-vcentered">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <p class="static" style="display: inline-block;">
+              <img src="https://cdn.prod.website-files.com/683e5da0b6d8a19de4875b10/6a874b200d7bbaffc6447388_Technology%20%26%20Research_%20Blog%20thumbnail_%20Labs%204%20(1).png" class="publication-teaser">
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://decagon.ai/blog/scaling-real-time-tts-inference">
+                Scaling Real-Time Text-to-Speech Inference
+              </a>
+            </h3>
+            <div class="publication-venue">Industry Blog</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Asgari, C.</span>
+            </div>
+            <p class="publication-description">
+              Rebuilding Decagon's streaming TTS pipeline on M* with stage-aware scheduling, packed prefill, paged KV caching, and CUDA Graphs — achieving 3x lower TTFA (27 ms) and 10x higher throughput at concurrency 8 for real-time voice model inference.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://decagon.ai/blog/scaling-real-time-tts-inference">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Blog Post</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://x.com/_rsiva/status/2090507399094575258">
+                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
+                <span>X</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decagon TTS RL Blog -->
+      <div class="publication-block columns is-vcentered">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <p class="static" style="display: inline-block;">
+              <img src="https://cdn.prod.website-files.com/683e5da0b6d8a19de4875b10/6a848fa9a8c4b5864039d8d0_Technology%20%26%20Research_%20Blog%20thumbnail_%20Labs%203%20(2).png" class="publication-teaser">
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">
+                Teaching Flow-Matching Text-to-Speech Models with RL
+              </a>
+            </h3>
+            <div class="publication-venue">Industry Blog</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Asgari, C.</span>
+            </div>
+            <p class="publication-description">
+              Flow-matching TTS architectures lack standard open-source RL post-training support. We design a specialized RL framework (GRPO/PPO) for continuous flow-matching models, eliminating acoustic artifacts and tightening sample distribution variance.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Blog Post</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://x.com/_rsiva/status/2088323155693850648">
+                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
+                <span>X</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="publication-block columns is-vcentered">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
@@ -450,6 +515,52 @@
               </a>
               <a class="external-link button is-small is-rounded"
                 href="https://github.com/RepV-Project/repv-project.github.io">
+                <span class="icon"><i class="fas fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Co-GLANCE -->
+      <div class="publication-block columns is-vcentered">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <p class="static" style="display: inline-block;">
+              <img src="./static/images/projects/co_glance/teaser.jpg" class="publication-teaser">
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://co-glance.github.io/">
+                Co-GLANCE: Uncertainty-Aware Active Perception for Heterogeneous Robot Teaming
+              </a>
+            </h3>
+            <div class="publication-venue">Under Submission</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-">Podolinsky, M. P.</span>,
+              <span class="author-block author-block-">Bhatt, N. P.</span>,
+              <span class="author-block author-block-">Samineni, P.</span>,
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Ellis, C.</span>,
+              <span class="author-block author-block-">Topcu, U.</span>
+            </div>
+            <p class="publication-description">
+              A real-time onboard perception and decision-making system for uncertainty resolution in heterogeneous robot teams. Distills semantic reasoning from vision-language models into an end-to-end model for occlusion segmentation and robot allocation, combining selective abstention and conformal prediction for calibrated uncertainty guarantees.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://co-glance.github.io/">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Project Page</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2606.09919">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://github.com/co-glance/co-glance.github.io">
                 <span class="icon"><i class="fas fab fa-github"></i></span>
                 <span>Code</span>
               </a>
