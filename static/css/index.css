@@ -3,6 +3,16 @@
     color: #000;
 }
 
+.publication-filters .button {
+    border-radius: 4px;
+}
+
+.publication-filters .button.is-active {
+    background-color: #363636;
+    border-color: #363636;
+    color: #fff;
+}
+
 .publication-block {
     background: #ffffff;
     border: 1px solid #e3e3e3;

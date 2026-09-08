@@ -75,10 +75,11 @@
             </ul>
 
             <p>
-              My research interests include embodied AI, RL, Agents, vision-language models, diffusion models, and mechanistic
-              interpretability. I focus on building AI systems that can perceive, reason, and act in complex
-              environments, with an emphasis on uncertainty quantification and neurosymbolic approaches for planning and
-              perception.
+              My research focuses on <b>robotics safety</b>, <b>reinforcement learning</b>, and <b>uncertainty
+                quantification</b>,
+              applied to world models, vision-language-action models, diffusion models, and foundation model
+              post-training and inference. I build embodied, neurosymbolic systems that perceive, reason, and act
+              safely in complex environments.
             </p>
 
             <div class="buttons">
@@ -137,14 +138,132 @@
     </div>
   </div>
 
+  <!-- News -->
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <h2 class="title is-3">News</h2>
+
+      <div class="content">
+        <table class="table is-fullwidth">
+          <tbody>
+            <tr>
+              <td style="white-space: nowrap;"><b>Sep 2026</b></td>
+              <td>My first-author paper <a href="#a4d"><i>"What Objects Enable, Not What They Are: Functional Latent
+                    Spaces for Affordance Reasoning"</i></a> was accepted to the <b>CoRL 2026 main conference</b>! 🏆
+              </td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;"><b>Aug 2026</b></td>
+              <td>Wrapped up my research internship at <b>Decagon AI</b>, publishing two blog posts: <a
+                  href="#decagon-tts-rl">Teaching Flow-Matching Text-to-Speech Models with RL</a> and <a
+                  href="#decagon-tts-inference">Scaling Real-Time Text-to-Speech Inference</a>.</td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;"><b>May 2026</b></td>
+              <td>Our paper <a href="#vln-zero"><i>"VLN-Zero: Rapid Exploration and Cache-Enabled Neurosymbolic
+                    Vision-Language Planning for Zero-Shot Transfer in Robot Navigation"</i></a> was selected as a
+                <b>Spotlight</b> at <b>NEUS 2026</b>. 🏆</td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;"><b>Dec 2025</b></td>
+              <td>Our paper <a href="#uncap"><i>"UNCAP: Uncertainty-Guided Planning Using Natural Language
+                    Communication for Cooperative Autonomous Vehicles"</i></a> was accepted to <b>AAMAS 2026</b> as
+                an <b>Oral</b> + <b>Best Paper Finalist</b>. 🏆</td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;"><b>Aug 2025</b></td>
+              <td>Wrapped up my internship at <b>Cisco</b> with the HyperAI Lab team, where I worked on <a
+                  href="#kraig">kRAIG</a>, a natural language-driven agent for automated DataOps pipeline
+                generation.</td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;"><b>Feb 2025</b></td>
+              <td>Our paper <a href="#mlsys2025"><i>"Know Where You're Uncertain When Planning with Multimodal
+                    Foundation Models: A Formal Framework"</i></a> was accepted to <b>MLSys 2025</b> as an
+                <b>Oral</b>. 🏆</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="hr">
+    <div class="container">
+      <hr>
+    </div>
+  </div>
+
   <!-- Publications -->
   <section class="section">
     <div class="container is-max-desktop">
 
       <h2 class="title is-3">Publications</h2>
 
+      <div class="buttons publication-filters">
+        <button class="button is-small publication-filter-btn is-active" data-filter="all">All
+          Publications</button>
+        <button class="button is-small publication-filter-btn" data-filter="conference">Conference Papers</button>
+        <button class="button is-small publication-filter-btn" data-filter="industry">Industry Blogs</button>
+        <button class="button is-small publication-filter-btn" data-filter="preprint">Preprints</button>
+      </div>
+
+      <!-- CoRL 2026 -->
+      <div id="a4d" class="publication-block columns is-vcentered" data-category="conference">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <video class="publication-teaser" autoplay loop muted playsinline>
+              <source src="./static/images/projects/a4d/a4d_teaser.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://arxiv.org/abs/2606.05533">
+                What Objects Enable, Not What They Are: Functional Latent Spaces for Affordance Reasoning
+              </a>
+            </h3>
+            <div class="publication-venue">CoRL 2026 🏆</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Bhatt, N. P.</span>,
+              <span class="author-block author-block-">Yang, Y.</span>,
+              <span class="author-block author-block-">Lee, S.</span>,
+              <span class="author-block author-block-">Gadde, N.</span>,
+              <span class="author-block author-block-">Ellis, C.</span>,
+              <span class="author-block author-block-">Velasquez, A.</span>,
+              <span class="author-block author-block-">Wang, Z.</span>,
+              <span class="author-block author-block-">Topcu, U.</span>
+            </div>
+            <p class="publication-description">
+              A4D maps visual observations into a shared functional latent space structured around affordances (e.g., "movable"),
+              enabling robot planning based on task-relevant object functionalities rather than appearance alone.
+              We achieve 94% inference accuracy on existing affordances — over 15% above state-of-the-art — while enabling 100x faster inference.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://a4dance-reasoning.github.io/">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Project Page</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2606.05533">
+                <span class=" icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+              <a class="external-link button is-small is-rounded"
+                href="https://github.com/a4dance-reasoning/a4dance-reasoning.github.io">
+                <span class="icon"><i class="fas fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Decagon TTS Inference Blog -->
-      <div class="publication-block columns is-vcentered">
+      <div id="decagon-tts-inference" class="publication-block columns is-vcentered" data-category="industry">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -182,7 +301,7 @@
       </div>
 
       <!-- Decagon TTS RL Blog -->
-      <div class="publication-block columns is-vcentered">
+      <div id="decagon-tts-rl" class="publication-block columns is-vcentered" data-category="industry">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -218,59 +337,9 @@
           </div>
         </div>
       </div>
-      <div class="publication-block columns is-vcentered">
-        <div class="column is-5">
-          <div class="publication-mouse-animate publication-inner-div">
-            <video class="publication-teaser" autoplay loop muted playsinline>
-              <source src="./static/images/projects/a4d/a4d_teaser.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="column">
-          <div class="content">
-            <h3 class="publication-title">
-              <a href="https://arxiv.org/abs/2606.05533">
-                What Objects Enable, Not What They Are: Functional Latent Spaces for Affordance Reasoning
-              </a>
-            </h3>
-            <div class="publication-venue">Under Submission</div>
-            <div class="publication-authors">
-              <span class="author-block author-block-"><b>Siva, R.</b></span>,
-              <span class="author-block author-block-">Bhatt, N. P.</span>,
-              <span class="author-block author-block-">Yang, Y.</span>,
-              <span class="author-block author-block-">Lee, S.</span>,
-              <span class="author-block author-block-">Gadde, N.</span>,
-              <span class="author-block author-block-">Ellis, C.</span>,
-              <span class="author-block author-block-">Velasquez, A.</span>,
-              <span class="author-block author-block-">Wang, Z.</span>,
-              <span class="author-block author-block-">Topcu, U.</span>
-            </div>
-            <p class="publication-description">
-              A4D maps visual observations into a shared functional latent space structured around affordances (e.g., "movable"),
-              enabling robot planning based on task-relevant object functionalities rather than appearance alone.
-              We achieve 94% inference accuracy on existing affordances — over 15% above state-of-the-art — while enabling 100x faster inference.
-            </p>
-            <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="https://a4dance-reasoning.github.io/">
-                <span class="icon"><i class="fas fa-globe-europe"></i></span>
-                <span>Project Page</span>
-              </a>
-              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2606.05533">
-                <span class=" icon"><i class="ai ai-arxiv"></i></span>
-                <span>arXiv</span>
-              </a>
-              <a class="external-link button is-small is-rounded"
-                href="https://github.com/a4dance-reasoning/a4dance-reasoning.github.io">
-                <span class="icon"><i class="fas fab fa-github"></i></span>
-                <span>Code</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- MLSys 2025 -->
-      <div class="publication-block columns is-vcentered">
+      <div id="mlsys2025" class="publication-block columns is-vcentered" data-category="conference">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -285,7 +354,7 @@
                 Know Where You're Uncertain When Planning with Multimodal Foundation Models: A Formal Framework
               </a>
             </h3>
-            <div class="publication-venue">MLSys, 2025 (Oral) 🏆</div>
+            <div class="publication-venue">MLSys, 2025 (<b>Oral</b>) 🏆</div>
             <div class="publication-authors">
               <span class="author-block author-block-">Bhatt, N. P.</span>,
               <span class="author-block author-block-">Yang, Y.</span>,
@@ -325,7 +394,7 @@
       </div>
 
       <!-- UNCAP -->
-      <div class="publication-block columns is-vcentered">
+      <div id="uncap" class="publication-block columns is-vcentered" data-category="conference">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -341,7 +410,7 @@
                 Vehicles
               </a>
             </h3>
-            <div class="publication-venue">AAMAS, 2026 (Oral + Best Paper Nominee) 🏆</div>
+            <div class="publication-venue">AAMAS, 2026 (<b>Oral</b> + <b>Best Paper Finalist</b>) 🏆</div>
             <div class="publication-authors">
               <span class="author-block author-block-">Bhatt, N. P.</span>,
               <span class="author-block author-block-">Li, P.</span>,
@@ -384,7 +453,7 @@
       </div>
 
       <!-- VLN-Zero -->
-      <div class="publication-block columns is-vcentered">
+      <div id="vln-zero" class="publication-block columns is-vcentered" data-category="conference">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -400,7 +469,7 @@
                 Transfer in Robot Navigation
               </a>
             </h3>
-            <div class="publication-venue">NEUS, 2026 (Oral) 🏆</div>
+            <div class="publication-venue">NEUS, 2026 (<b>Spotlight</b>) 🏆</div>
             <div class="publication-authors">
               <span class="author-block author-block-">Bhatt, N. P.</span>,
               <span class="author-block author-block-">Yang, Y.</span>,
@@ -434,7 +503,7 @@
       </div>
 
       <!-- kRAIG -->
-      <div class="publication-block columns is-vcentered">
+      <div id="kraig" class="publication-block columns is-vcentered" data-category="preprint">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -473,7 +542,7 @@
       </div>
 
       <!-- RepV -->
-      <div class="publication-block columns is-vcentered">
+      <div id="repv" class="publication-block columns is-vcentered" data-category="preprint">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -524,7 +593,7 @@
       </div>
 
       <!-- Co-GLANCE -->
-      <div class="publication-block columns is-vcentered">
+      <div id="co-glance" class="publication-block columns is-vcentered" data-category="preprint">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
