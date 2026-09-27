@@ -103,9 +103,9 @@
                 <span>LinkedIn</span>
               </a>
 
-              <a class="button" href="blog/">
-                <span class="icon"><i class="fas fa-pen-nib"></i></span>
-                <span>Blog</span>
+              <a class="external-link button" href="https://x.com/_rsiva">
+                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
+                <span>X</span>
               </a>
 
               <div class="dropdown is-hoverable">
@@ -211,7 +211,7 @@
         <button class="button is-small publication-filter-btn is-active" data-filter="all">All
           Publications</button>
         <button class="button is-small publication-filter-btn" data-filter="conference">Conference Papers</button>
-        <button class="button is-small publication-filter-btn" data-filter="industry">Industry Blogs</button>
+        <button class="button is-small publication-filter-btn" data-filter="blog">Blogs</button>
         <button class="button is-small publication-filter-btn" data-filter="preprint">Preprints</button>
       </div>
 
@@ -267,8 +267,43 @@
         </div>
       </div>
 
+      <!-- Research blog: attention sinks in diffusion transformers -->
+      <div id="where-did-the-sink-go" class="publication-block columns is-vcentered" data-category="blog">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <p class="static" style="display: inline-block;">
+              <img src="blog/where-did-the-sink-go/images/teaser.png" class="publication-teaser"
+                alt="Attention received vs text-token norm in diffusion transformers">
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="blog/where-did-the-sink-go/">
+                Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers
+              </a>
+            </h3>
+            <div class="publication-venue">Research Blog</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Gu, X.</span>
+            </div>
+            <p class="publication-description">
+              In LLMs, one token is both the attention sink and the massive activation. Across SD3.5, Qwen-Image, Mochi and HunyuanVideo, both move into the text stream: the strongest sinks are the highest-norm text tokens, while image tokens carry a single shared hot channel written by the adaLN gate.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="blog/where-did-the-sink-go/">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Blog Post</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Decagon TTS Inference Blog -->
-      <div id="decagon-tts-inference" class="publication-block columns is-vcentered" data-category="industry">
+      <div id="decagon-tts-inference" class="publication-block columns is-vcentered" data-category="blog">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -306,7 +341,7 @@
       </div>
 
       <!-- Decagon TTS RL Blog -->
-      <div id="decagon-tts-rl" class="publication-block columns is-vcentered" data-category="industry">
+      <div id="decagon-tts-rl" class="publication-block columns is-vcentered" data-category="blog">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
@@ -663,6 +698,10 @@
 
         <a class="external-link" href="https://www.linkedin.com/in/rohan-siva">
           <i class="fa-brands fa-linkedin"></i>
+        </a>
+
+        <a class="external-link" href="https://x.com/_rsiva">
+          <i class="fa-brands fa-x-twitter"></i>
         </a>
       </div>
     </div>
