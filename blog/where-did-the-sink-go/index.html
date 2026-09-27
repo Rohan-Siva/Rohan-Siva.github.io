@@ -45,10 +45,7 @@
     <div class="container is-max-desktop">
       <article class="content">
         <h1 class="title is-2 blog-title">Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers</h1>
-        <p class="blog-byline">Rohan Siva &middot; September 26, 2026</p>
-        <blockquote>
-        <p><strong>Scope.</strong> Four models, five prompts each, one seed, analyzed at the final denoising step (plus a 28-step denoising sweep for Qwen-Image). Everything here is observational: we haven't intervened on the models yet (see §10).</p>
-        </blockquote>
+        <p class="blog-byline">Rohan Siva and Xiangming Gu &middot; September 26, 2026</p>
         <p><strong>TL;DR.</strong> In LLMs, a single token (usually the first) plays two roles: it's the <strong>attention sink</strong> that soaks up most of the attention, and it carries <strong>massive activations</strong>, values hundreds of times larger than typical. We looked inside four text-to-image and text-to-video diffusion transformers (SD3.5 Large, Qwen-Image, Mochi 1, HunyuanVideo) and asked where that token went. The short answer: <strong>into the text.</strong></p>
         <ol>
         <li><strong>The sinks move into the text.</strong> In every model and on every prompt, a text token is the most-attended token in nearly every layer. In the two image models it's a fixed structural token: Qwen-Image's chat-template <code>&lt;|im_end|&gt;</code> (about 300× its uniform share of attention, versus 25× for the LLM's first token), or an SD3.5 CLIP padding slot.</li>
@@ -297,7 +294,7 @@
         <li><strong>This is four models</strong>, so it's a correlation, not a law.</li>
         <li><strong>HunyuanVideo's gate jumps from about 4 to about 20 at layer 20.</strong> That's exactly where the architecture switches from dual-stream to single-stream blocks, so it's partly an architectural effect.</li>
         </ul>
-        <p><strong>Why a channel for images but a token for text?</strong> Here's our working hypothesis. The adaLN gate is a per-channel vector computed from the timestep and shared by every token (<code>[batch, channels]</code>). If the network needs a large, content-independent signal in the image stream, the cheapest way to build one with this machinery is to open one gate channel wide, writing the same large value into every patch. For a place to <em>park attention</em>, though, it needs a token that every query can find, and text tokens are the natural candidates: they carry no pixels to corrupt. An LLM has neither per-channel gates nor a separate stream, so it does both jobs with its first token. We haven't tested this causally yet (§10).</p>
+        <p><strong>Why a channel for images but a token for text?</strong> Here's our working hypothesis. The adaLN gate is a per-channel vector computed from the timestep and shared by every token (<code>[batch, channels]</code>). If the network needs a large, content-independent signal in the image stream, the cheapest way to build one with this machinery is to open one gate channel wide, writing the same large value into every patch. For a place to <em>park attention</em>, though, it needs a token that every query can find, and text tokens are the natural candidates: they carry no pixels to corrupt. An LLM has neither per-channel gates nor a separate stream, so it does both jobs with its first token. We haven't tested this causally yet.</p>
         <hr />
         <h2 id="8-across-denoising-sinks-and-massive-activations-run-on-different-clocks">8. Across denoising, sinks and massive activations run on different clocks</h2>
         <p>Diffusion models run the same network many times, from pure noise to a clean image. We tracked Qwen-Image across all 28 denoising steps:</p>
@@ -316,26 +313,6 @@
         <li><strong>Revisiting a Mochi sink paper.</strong> A prior study (arXiv 2504.10317) reported that Mochi's sinks appear only in its last four layers. On Mochi's conditional pass we found sink heads throughout: 453 in layers 0–43 vs 65 in layers 44–47. The last two layers do have mostly sink heads (88% and 71%). The paper's first-frame bias partly replicates: frame 0 has 27 sink tokens, frame 1 has 3, frame 2 has 11.</li>
         </ul>
         <hr />
-        <h2 id="10-limitations-and-what-s-next">10. Limitations and what's next</h2>
-        <p><strong>Limitations.</strong></p>
-        <ul>
-        <li>One seed per prompt; the final denoising step only, except for the Qwen-Image sweep.</li>
-        <li>Five prompts per model: enough to show the patterns are stable, not enough to estimate how they vary.</li>
-        <li>Everything is observational. We haven't intervened on anything yet.</li>
-        </ul>
-        <p><strong>Next experiments, in priority order.</strong></p>
-        <ol>
-        <li><strong>Interventions</strong> to test whether any of this is causal:<ul>
-        <li>Zero or clamp the image stream's hot channel.</li>
-        <li>Set the gate on the hot channel to the median.</li>
-        <li>Block attention to the sink text tokens, or replace them with a fixed register.</li>
-        <li>Measure what happens to the images and videos.</li>
-        </ul>
-        </li>
-        <li><strong>A denoising sweep on SD3.5,</strong> with text-token hidden states, to compare with Gan et al. and check whether the §4 pairing holds at every timestep.</li>
-        <li><strong>More seeds per prompt,</strong> to put error bars on the numbers.</li>
-        </ol>
-        <hr />
         <h2 id="appendix-methods">Appendix: methods</h2>
         <ul>
         <li><strong>Capture.</strong> For each model we recompute the attention matrix explicitly (softmax of QKᵀ/√d) for the conditional pass. We hook each block's input for the residual stream (image and text streams separately) and its adaLN module for the gate.<ul>
@@ -353,6 +330,7 @@
         </ul>
         <p><strong>References</strong></p>
         <ul>
+        <li>Gu et al. 2025. <em>When Attention Sink Emerges in Language Models: An Empirical View.</em> ICLR (Spotlight).</li>
         <li>Sun et al. 2026. <em>The Spike, the Sparse and the Sink.</em></li>
         <li>Gan et al. 2025. <em>Unleashing Diffusion Transformers for Visual Correspondence by Modulating Massive Activations.</em> NeurIPS.</li>
         <li>Gan et al. 2026. <em>Massive Activations are the Key to Local Detail Synthesis in Diffusion Transformers.</em> ICLR.</li>
