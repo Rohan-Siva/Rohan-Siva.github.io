@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Blog – Rohan Siva</title>
+  <link rel="icon" type="image/png" href="../static/images/icon.png" />
+  <link rel="canonical" href="https://rohan-siva.github.io/blog/" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3ETG3ZXBL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-C3ETG3ZXBL');
+  </script>
+
+  <meta name="description" content="Research notes and write-ups by Rohan Siva.">
+  <meta property="og:site_name" content="Rohan Siva">
+  <meta property="og:title" content="Blog – Rohan Siva">
+  <meta property="og:description" content="Research notes and write-ups by Rohan Siva.">
+  <meta property="og:type" content="website" />
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="../static/css/fontawesome.all.min.css" rel="stylesheet">
+  <link href="../static/css/bulma.min.css" rel="stylesheet">
+  <link href="../static/css/index.css" rel="stylesheet">
+  <link href="../static/css/blog.css" rel="stylesheet">
+  <script defer src="../static/js/fontawesome.all.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="blog-nav container is-max-desktop">
+    <a href="../">Rohan Siva</a>
+    <span class="blog-nav-sep">/</span>
+    <a href="./">Blog</a>
+  </nav>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <h1 class="title is-3">Blog</h1>
+      <p class="blog-list-intro">Research notes and longer write-ups. Industry posts are listed under
+        <a href="../#decagon-tts-inference">Publications</a> on the main page.</p>
+
+      <div class="publication-block columns is-vcentered">
+        <div class="column is-4">
+          <div class="publication-inner-div">
+            <a href="where-did-the-sink-go/">
+              <img src="where-did-the-sink-go/images/teaser.png" class="publication-teaser"
+                alt="Attention received vs text-token norm in four diffusion transformers">
+            </a>
+          </div>
+        </div>
+        <div class="column">
+          <div class="publication-title">
+            <a href="where-did-the-sink-go/">Where Did the Sink Go? Attention Sinks and Massive Activations in
+              Text-to-Image and Video Diffusion Transformers</a>
+          </div>
+          <p class="blog-card-meta">September 26, 2026</p>
+          <div class="publication-venue">Research Blog</div>
+          <div class="publication-description">
+            In LLMs, one token is both the attention sink and the massive activation. Across SD3.5, Qwen-Image,
+            Mochi and HunyuanVideo, both move into the text stream: the strongest sinks are the highest-norm text
+            tokens, while image tokens carry a single shared hot channel written by the adaLN gate.
+          </div>
+          <div class="publication-links">
+            <a class="external-link button is-small is-rounded" href="where-did-the-sink-go/">
+              <span class="icon is-small"><i class="fas fa-book-open"></i></span>
+              <span>Read</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a href="../">&larr; rohan-siva.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

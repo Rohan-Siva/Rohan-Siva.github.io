@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers – Rohan Siva</title>
+  <link rel="icon" type="image/png" href="../../static/images/icon.png" />
+  <link rel="canonical" href="https://rohan-siva.github.io/blog/where-did-the-sink-go/" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3ETG3ZXBL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-C3ETG3ZXBL');
+  </script>
+
+  <meta name="description" content="In LLMs one token is both the attention sink and the massive activation. In text-to-image and video diffusion transformers, both move into the text stream, while image tokens carry a single shared hot channel written by the adaLN gate.">
+  <meta property="og:site_name" content="Rohan Siva">
+  <meta property="og:title" content="Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers">
+  <meta property="og:description" content="In LLMs one token is both the attention sink and the massive activation. In text-to-image and video diffusion transformers, both move into the text stream, while image tokens carry a single shared hot channel written by the adaLN gate.">
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://rohan-siva.github.io/blog/where-did-the-sink-go/images/fig8_sink_vs_text_norm.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="../../static/css/fontawesome.all.min.css" rel="stylesheet">
+  <link href="../../static/css/bulma.min.css" rel="stylesheet">
+  <link href="../../static/css/index.css" rel="stylesheet">
+  <link href="../../static/css/blog.css" rel="stylesheet">
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="blog-nav container is-max-desktop">
+    <a href="../../">Rohan Siva</a>
+    <span class="blog-nav-sep">/</span>
+    <a href="../">Blog</a>
+  </nav>
+
+  <section class="section blog-post">
+    <div class="container is-max-desktop">
+      <article class="content">
+        <h1 class="title is-2 blog-title">Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers</h1>
+        <p class="blog-byline">Rohan Siva &middot; September 26, 2026</p>
+        <blockquote>
+        <p><strong>Scope.</strong> Four models, five prompts each, one seed, analyzed at the final denoising step (plus a 28-step denoising sweep for Qwen-Image). Everything here is observational: we haven't intervened on the models yet (see §10).</p>
+        </blockquote>
+        <p><strong>TL;DR.</strong> In LLMs, a single token (usually the first) plays two roles: it's the <strong>attention sink</strong> that soaks up most of the attention, and it carries <strong>massive activations</strong>, values hundreds of times larger than typical. We looked inside four text-to-image and text-to-video diffusion transformers (SD3.5 Large, Qwen-Image, Mochi 1, HunyuanVideo) and asked where that token went. The short answer: <strong>into the text.</strong></p>
+        <ol>
+        <li><strong>The sinks move into the text.</strong> In every model and on every prompt, a text token is the most-attended token in nearly every layer. In the two image models it's a fixed structural token: Qwen-Image's chat-template <code>&lt;|im_end|&gt;</code> (about 300× its uniform share of attention, versus 25× for the LLM's first token), or an SD3.5 CLIP padding slot.</li>
+        <li><strong>The sink's large norm moves with it.</strong> The strongest sinks are the highest-norm tokens <em>in the text stream</em>. That's the LLM's sink-plus-outlier pairing, relocated. It matches the idea that text tokens act as "registers."</li>
+        <li><strong>Image tokens never develop LLM-scale outliers.</strong> The largest image token is within 3.4× of the median in three models. In HunyuanVideo, two or three patches per prompt reach 12–15×. The LLM's first token reaches 904×.</li>
+        <li><strong>The image stream gets a different kind of massive activation: one hidden channel that every token shares.</strong> In SD3.5 it's channel 676, the same one Gan et al. (2025) found. <strong>The adaLN attention gate is itself an outlier on that channel,</strong> in all four models.</li>
+        <li><strong>Over denoising (Qwen-Image), sinks fade while the massive activation peaks mid-way.</strong> The two phenomena run on different clocks.</li>
+        </ol>
+        <p>All of this is stable across five different prompts per model.</p>
+        <figure class="blog-figure"><img src="images/fig0_generated_images.png" alt="Two of the outputs whose internals we dissect (the video models are analyzed the same way)." loading="lazy"><figcaption>Two of the outputs whose internals we dissect (the video models are analyzed the same way).</figcaption></figure>
+        <hr />
+        <h2 id="1-why-look-for-sinks-in-diffusion-transformers">1. Why look for sinks in diffusion transformers?</h2>
+        <p><strong>Attention sinks</strong> are tokens that receive a disproportionate share of attention from nearly every query, regardless of content. In LLMs this is usually the first token. The prevailing explanation: softmax attention has to put its probability mass <em>somewhere</em>, and a head that wants to do "nothing" parks it on a token whose value vector contributes little.</p>
+        <p><strong>Massive activations</strong> are a few activation values that are orders of magnitude larger than the rest of the hidden state. In LLMs they sit on the <em>same</em> first token, in a handful of channels. They appear abruptly in an early layer, stay roughly constant, and are neutralized near the end: a rise–plateau–fall shape. The two are linked: the huge activations help make that token's key align with every query.</p>
+        <p>Diffusion transformers differ from LLMs in three ways that should matter for both:</p>
+        <ul>
+        <li><strong>No causal mask.</strong> In a causal LLM, every query can see token 0, which gives it a structural head start. Diffusion transformers use bidirectional attention, so no position is privileged.</li>
+        <li><strong>Text and image share one sequence.</strong> Multimodal diffusion transformers (MMDiTs, like SD3) run <em>joint attention</em> over text tokens and image/video patch tokens in a single softmax. Many also keep text and image in <strong>separate streams</strong> with their own weights, joined only inside attention.</li>
+        <li><strong>Adaptive LayerNorm (adaLN).</strong> Instead of fixed LayerNorm weights, each block computes its shift, scale, and output <strong>gate</strong> from the timestep (and sometimes a pooled text embedding). The gate multiplies the attention output per channel before it's added back to the residual stream.</li>
+        </ul>
+        <figure class="blog-figure"><img src="images/fig_adaln_block.png" alt="An adaLN-Zero attention sub-block. The timestep (plus pooled text in some models) is turned into a shift/scale for the norm and a per-channel gate g on the attention output. Because g has one value per channel and is shared by all tokens, it can only write the same pattern into every token. Keep that in mind for §7." loading="lazy"><figcaption>An adaLN-Zero attention sub-block. The timestep (plus pooled text in some models) is turned into a shift/scale for the norm and a per-channel gate g on the attention output. Because g has one value per channel and is shared by all tokens, it can only write the same pattern into every token. Keep that in mind for §7.</figcaption></figure>
+        <h3>What prior work found</h3>
+        <ul>
+        <li><strong>Gan et al. (NeurIPS 2025)</strong> found that DiT image tokens have <em>channel-wise</em> massive activations: one or two channels are large on every token (SD3.5 channel 676; FLUX channels 154 and 1446). They also found the residual-branch gate spikes on the same channel.</li>
+        <li><strong>Gan et al. (ICLR 2026)</strong> reported that these activations grow steadily as denoising proceeds, don't depend on the prompt, and matter for fine detail.</li>
+        <li><strong>Cheng et al. (2026)</strong> reported the same channel-wise pattern in video DiTs, stronger on first-frame and temporal-boundary tokens.</li>
+        <li><strong>Starodubcev et al. (2026)</strong> showed that class-conditional DiTs have <em>no</em> token-wise outliers unless trained with register tokens. In text-to-image models, <strong>text tokens become high-norm outliers</strong>, as if acting as registers.</li>
+        </ul>
+        <p>Nobody, as far as we know, has put attention sinks and massive activations side by side across image <em>and</em> video MMDiTs, in both the image and the text stream. That's what we do here.</p>
+        <hr />
+        <h2 id="2-setup">2. Setup</h2>
+        <div class="table-wrap"><table>
+        <thead>
+        <tr>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Layers</th>
+        <th>Tokens in joint attention</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>SD3.5 Large</td>
+        <td>image, MMDiT</td>
+        <td>38</td>
+        <td>1,024 image + 333 text (77 CLIP + 256 T5)</td>
+        </tr>
+        <tr>
+        <td>Qwen-Image</td>
+        <td>image, MMDiT</td>
+        <td>60</td>
+        <td>4,096 image + 12–17 text</td>
+        </tr>
+        <tr>
+        <td>Mochi 1</td>
+        <td>video, asymmetric DiT</td>
+        <td>48</td>
+        <td>4,770 video + 11–16 text</td>
+        </tr>
+        <tr>
+        <td>HunyuanVideo</td>
+        <td>video, dual → single stream</td>
+        <td>60 (20 + 40)</td>
+        <td>768 video + 10–18 real text tokens (256 slots, padding masked)</td>
+        </tr>
+        <tr>
+        <td>Qwen2.5-1.5B</td>
+        <td>LLM baseline (causal)</td>
+        <td>28</td>
+        <td>48</td>
+        </tr>
+        </tbody>
+        </table></div>
+        <p>Every diffusion model ran the same five prompts:</p>
+        <ul>
+        <li>"A photo of a cat sitting on a table"</li>
+        <li>"A futuristic cityscape at night, cinematic lighting"</li>
+        <li>"A microscopic view of a cell splitting"</li>
+        <li>"An old man playing chess in a park, autumn leaves falling"</li>
+        <li>"A red sports car driving along a coastal road at sunset"</li>
+        </ul>
+        <p>For every layer we record, at the final denoising step:</p>
+        <ul>
+        <li>the full attention matrix (all heads)</li>
+        <li>value-vector norms</li>
+        <li>the residual-stream hidden state entering the block, for <strong>both</strong> the image/video tokens and the text tokens</li>
+        <li>the adaLN attention gate</li>
+        <li>the attention output norm before and after gating</li>
+        </ul>
+        <p>Everything is seed 42, bf16.</p>
+        <p><strong>Metrics.</strong></p>
+        <ul>
+        <li><strong>Attention received</strong> by token <em>k</em> is its column mean, α<em>ₖ</em> = (1/N) Σ<em>ₜ</em> A<em>ₜₖ</em>: how much attention an average query gives it. Uniform attention gives 1/N. We report α in <strong>multiples of uniform</strong> so models with different sequence lengths are comparable.</li>
+        <li><strong>Token-wise outlier ratio</strong> = the largest token's max |activation| ÷ the median token's.</li>
+        <li><strong>Channel-wise outlier ratio</strong> = a channel's mean |activation| over all tokens ÷ the median channel's.</li>
+        <li><strong>Text-token norm</strong> = the L2 norm of a text token's hidden state ÷ the median text token's, at the same layer.</li>
+        </ul>
+        <hr />
+        <h2 id="3-sinks-exist-in-every-model-and-they-live-in-the-text">3. Sinks exist in every model, and they live in the text</h2>
+        <figure class="blog-figure"><img src="images/fig1_sink_profiles.png" alt="Attention received per token, averaged over layers and heads, in multiples of uniform (prompt shown: each model&#x27;s original prompt). Shaded band = text tokens." loading="lazy"><figcaption>Attention received per token, averaged over layers and heads, in multiples of uniform (prompt shown: each model&#x27;s original prompt). Shaded band = text tokens.</figcaption></figure>
+        <p>Every diffusion model has a handful of tokens that draw far more than their share of attention, and <strong>the strongest ones are text tokens</strong>. A text token is the single most-attended token in almost every layer: 33–37 of 38 layers in SD3.5, 59 of 60 in Qwen-Image, 42–47 of 48 in Mochi, and 60 of 60 in HunyuanVideo, across all five prompts. Image and video patches mostly sit near the uniform line. Mochi has one video patch that stands out (about 65× uniform), a reminder that image-side sinks aren't impossible, just rare.</p>
+        <p>Text tokens draw far more attention than their numbers would predict. HunyuanVideo's 11 real text tokens are 1.4% of the tokens it attends over, yet receive 28% of all attention. Qwen-Image's 14 are 0.3% of the sequence and receive 21%.</p>
+        <figure class="blog-figure"><img src="images/fig2_text_attention_share.png" alt="Text tokens&#x27; share of the sequence (hollow) vs their share of attention (filled), averaged over layers." loading="lazy"><figcaption>Text tokens&#x27; share of the sequence (hollow) vs their share of attention (filled), averaged over layers.</figcaption></figure>
+        <p><strong>Which tokens are they?</strong> We decoded the sink positions with each pipeline's own tokenizer and prompt template:</p>
+        <div class="table-wrap"><table>
+        <thead>
+        <tr>
+        <th>Model</th>
+        <th>Top sink</th>
+        <th>What it is</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Qwen-Image</td>
+        <td><code>&lt;|im_end|&gt;</code> on all 5 prompts; next come <code>assistant</code>, <code>\n</code>, <code>&lt;|im_start|&gt;</code></td>
+        <td>Chat-template tokens that the pipeline appends after every prompt</td>
+        </tr>
+        <tr>
+        <td>SD3.5 Large</td>
+        <td>CLIP padding slot 75 on all 5 prompts; next, CLIP <code>&lt;|startoftext|&gt;</code> and padding slots 72–74</td>
+        <td>The start token and <em>padding</em> at the end of the 77-token CLIP window. SD3 doesn't mask padding, so these are real sinks.</td>
+        </tr>
+        <tr>
+        <td>HunyuanVideo</td>
+        <td>a prompt token that changes with the prompt ("photo", the first word, a piece of "autumn")</td>
+        <td>Content tokens, with the <code>&lt;|end_header_id|&gt;</code> delimiter close behind</td>
+        </tr>
+        <tr>
+        <td>Mochi 1</td>
+        <td>a prompt token that changes with the prompt (<code>futur</code>, <code>at</code>, <code>in</code>, a word piece)</td>
+        <td>Content tokens, with <code>&lt;/s&gt;</code> a frequent per-layer sink</td>
+        </tr>
+        </tbody>
+        </table></div>
+        <p>So the image models sink onto <strong>fixed structural positions</strong>, the same kind of "no-content" slots LLMs use (BOS, delimiters, padding). Content words like "cat" or "cityscape" never become the sink there. The two video models are different: their top sink is a real prompt token, and which one depends on the prompt. §4 explains what those tokens have in common.</p>
+        <p><strong>A note on thresholds.</strong> The LLM sink metric of Sun et al. (2026) counts a head as sinking if some token receives &gt; 0.3 of the average query's attention. That fires for 82% of the LLM's heads but only 0.4–6% of the diffusion models'. That's not because the diffusion sinks are weak. With 1,000–4,800 tokens instead of 48, "30% of all attention" is a much higher bar. Relative to uniform, the diffusion sinks are as strong or stronger: the top sink averages 294–359× uniform in Qwen-Image, 134–205× in Mochi, 49–66× in HunyuanVideo, and 22–24× in SD3.5, versus 25× for the LLM's first token.</p>
+        <hr />
+        <h2 id="4-the-outlier-moved-too-the-strongest-sinks-are-the-highest-norm-text-tokens">4. The outlier moved too: the strongest sinks are the highest-norm text tokens</h2>
+        <p>In an LLM, the sink token is also the massive-activation token. We'll see in §5 that no image token plays that role in these models. So we recorded the <strong>text</strong> tokens' hidden states too, and asked whether the sink tokens stand out there.</p>
+        <p>They do:</p>
+        <figure class="blog-figure"><img src="images/fig8_sink_vs_text_norm.png" alt="Each dot is one text token from one of the five prompts. x: its norm relative to the median text token (median over layers). y: attention it receives. Outlined: each prompt&#x27;s top sink." loading="lazy"><figcaption>Each dot is one text token from one of the five prompts. x: its norm relative to the median text token (median over layers). y: attention it receives. Outlined: each prompt&#x27;s top sink.</figcaption></figure>
+        <ul>
+        <li><strong>SD3.5.</strong> CLIP <code>&lt;|startoftext|&gt;</code> is the highest-norm text token on all five prompts, at 24–33× the typical text token, and it's the #2 sink. The #1 sink, CLIP padding slot 75, is the next-highest-norm token by this measure.</li>
+        <li><strong>Qwen-Image.</strong> <code>&lt;|im_end|&gt;</code> is 9–11× the typical text token, the second-highest norm on every prompt. The highest is <code>assistant</code> or <code>&lt;|im_end|&gt;</code> itself, also a top sink.</li>
+        <li><strong>HunyuanVideo, dual-stream layers (0–19),</strong> where text has its own stream. On every prompt, the top sink is the #1 highest-norm text token (#2 once), and the two strongest sinks are exactly the two highest-norm tokens on 4 of 5 prompts. That's why its sink changes with the prompt: it follows whichever token the text encoder made largest.</li>
+        <li><strong>Mochi</strong> shows the same rule, weaker. Its text stream has no big outliers (the largest token is only 2.5–3.9× the median). Still, the top sink is the highest-norm text token on 4 of 5 prompts.</li>
+        </ul>
+        <p>The one wrinkle is <strong>HunyuanVideo's single-stream layers (20–59)</strong>, where text and video share weights. Norm and attention still correlate strongly across the text tokens (rank correlation +0.53 to +0.79). But a few tokens grow into huge outliers, 140–170× the typical video token, and those aren't the single top sink.</p>
+        <p>So the LLM's pairing, where one token is both the sink and the outlier, <strong>survives. It just lives in the text stream.</strong> This is what Starodubcev et al.'s "text as registers" picture predicts: text tokens, which carry no image content of their own, serve as the place to park attention and to store large, content-free signals.</p>
+        <hr />
+        <h2 id="5-image-tokens-don-t-get-llm-scale-outliers">5. Image tokens don't get LLM-scale outliers</h2>
+        <figure class="blog-figure"><img src="images/fig3_token_spike_ratio.png" alt="Largest image/video token ÷ median token, per layer. The LLM&#x27;s first token reaches 904×; HunyuanVideo reaches 15×; the rest stay under 3×." loading="lazy"><figcaption>Largest image/video token ÷ median token, per layer. The LLM&#x27;s first token reaches 904×; HunyuanVideo reaches 15×; the rest stay under 3×.</figcaption></figure>
+        <p>The LLM shows the textbook shape: at layer 2, its first token jumps to hundreds of times the median, stays there, and collapses at the final layer. Among image and video tokens, <strong>nothing comes close</strong>:</p>
+        <ul>
+        <li>In SD3.5, Qwen-Image, and Mochi, the most extreme token is within 3.4× of the median in every layer, on every prompt.</li>
+        <li>HunyuanVideo is the one partial exception. On every prompt, two or three video patches reach 12–15× the median, only in its dual-stream layers (within layers 9–18).<ul>
+        <li>Which patches it is changes with the prompt, and they have no consistent position.</li>
+        <li>The whole excess is on the same shared hot channel described next.</li>
+        <li>The strongest of them is also a mild sink (10–14× uniform on every prompt): the same pairing as §4, in miniature.</li>
+        </ul>
+        </li>
+        </ul>
+        <hr />
+        <h2 id="6-the-image-stream-s-massive-activation-one-channel-that-every-token-shares">6. The image stream's massive activation: one channel that every token shares</h2>
+        <p>If the image stream's massive activations aren't in any one token, where are they? In a single hidden channel, large on essentially <strong>every</strong> token:</p>
+        <figure class="blog-figure"><img src="images/fig4_hot_channel.png" alt="Mean |activation| over all tokens, per channel, relative to the median channel, at the middle layer." loading="lazy"><figcaption>Mean |activation| over all tokens, per channel, relative to the median channel, at the middle layer.</figcaption></figure>
+        <div class="table-wrap"><table>
+        <thead>
+        <tr>
+        <th>Model</th>
+        <th>Dominant channel</th>
+        <th>Top channel in how many layers</th>
+        <th>Tokens that are large on it</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>SD3.5 Large</td>
+        <td><strong>676</strong></td>
+        <td>38 / 38</td>
+        <td>~100%</td>
+        </tr>
+        <tr>
+        <td>Qwen-Image</td>
+        <td>673</td>
+        <td>59 / 60</td>
+        <td>~95%</td>
+        </tr>
+        <tr>
+        <td>Mochi 1</td>
+        <td>2980</td>
+        <td>47 / 48</td>
+        <td>~100%</td>
+        </tr>
+        <tr>
+        <td>HunyuanVideo</td>
+        <td>1028</td>
+        <td>58 / 60</td>
+        <td>~100%</td>
+        </tr>
+        </tbody>
+        </table></div>
+        <p>The channel is the same on all five prompts in every model.</p>
+        <p><strong>SD3.5's channel is 676, exactly the one Gan et al. report.</strong> It's a clean independent replication, and the same pattern holds in the other three models, including both video models. The scale differs wildly: SD3.5's channel peaks in the hundreds, HunyuanVideo's at 200,000–300,000, and Qwen-Image's residual stream is enormous everywhere (the median token norm at the middle layer is about 25 million).</p>
+        <hr />
+        <h2 id="7-the-gate-writes-into-that-channel">7. The gate writes into that channel</h2>
+        <p>Gan et al. noticed that SD3.5's residual gate spikes on channel 676. We checked whether that generalizes, and it does. <strong>In every model, the attention gate is itself an outlier on the massive-activation channel:</strong></p>
+        <figure class="blog-figure"><img src="images/fig5_gate_hot_channel.png" alt="Left: SD3.5&#x27;s attention gate at layer 1; channel 676 dwarfs the rest. Right: gate on the hot channel ÷ median gate, across depth, for all four models. Above the dashed line, the hot channel&#x27;s gate is larger than a typical channel&#x27;s." loading="lazy"><figcaption>Left: SD3.5&#x27;s attention gate at layer 1; channel 676 dwarfs the rest. Right: gate on the hot channel ÷ median gate, across depth, for all four models. Above the dashed line, the hot channel&#x27;s gate is larger than a typical channel&#x27;s.</figcaption></figure>
+        <div class="table-wrap"><table>
+        <thead>
+        <tr>
+        <th>Model</th>
+        <th>Gate on hot channel ÷ median gate (median over layers)</th>
+        <th>Layers where it's the gate's single largest channel</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Qwen-Image</td>
+        <td>8.7×</td>
+        <td>55 / 60</td>
+        </tr>
+        <tr>
+        <td>SD3.5 Large</td>
+        <td>7.8–8.1×</td>
+        <td>25 / 38</td>
+        </tr>
+        <tr>
+        <td>HunyuanVideo</td>
+        <td>4.8×</td>
+        <td>28 / 60</td>
+        </tr>
+        <tr>
+        <td>Mochi 1</td>
+        <td>2.2×</td>
+        <td>14 / 48</td>
+        </tr>
+        </tbody>
+        </table></div>
+        <p>The effect is strongest in the first couple of layers (up to about 95× in SD3.5 at layer 1), which is plausibly where the channel gets seeded. Because the gate is computed from the timestep, not the image, these ratios barely move across prompts.</p>
+        <p>The gates also set the overall scale. Across models, the average gate magnitude spans two orders of magnitude, and the peak activation spans five:</p>
+        <figure class="blog-figure"><img src="images/fig6_gate_vs_activation_scale.png" alt="Mean |attention gate| vs peak activation per model." loading="lazy"><figcaption>Mean |attention gate| vs peak activation per model.</figcaption></figure>
+        <p>In the two models with large activations, the gate <strong>amplifies</strong> rather than suppresses. Averaged over layers, the gated attention output is about 8× the ungated output in HunyuanVideo and about 106× in Qwen-Image. In SD3.5 it's roughly neutral (1.2×), and Mochi's gate actually shrinks it (0.5×). Two cautions:</p>
+        <ul>
+        <li><strong>This is four models</strong>, so it's a correlation, not a law.</li>
+        <li><strong>HunyuanVideo's gate jumps from about 4 to about 20 at layer 20.</strong> That's exactly where the architecture switches from dual-stream to single-stream blocks, so it's partly an architectural effect.</li>
+        </ul>
+        <p><strong>Why a channel for images but a token for text?</strong> Here's our working hypothesis. The adaLN gate is a per-channel vector computed from the timestep and shared by every token (<code>[batch, channels]</code>). If the network needs a large, content-independent signal in the image stream, the cheapest way to build one with this machinery is to open one gate channel wide, writing the same large value into every patch. For a place to <em>park attention</em>, though, it needs a token that every query can find, and text tokens are the natural candidates: they carry no pixels to corrupt. An LLM has neither per-channel gates nor a separate stream, so it does both jobs with its first token. We haven't tested this causally yet (§10).</p>
+        <hr />
+        <h2 id="8-across-denoising-sinks-and-massive-activations-run-on-different-clocks">8. Across denoising, sinks and massive activations run on different clocks</h2>
+        <p>Diffusion models run the same network many times, from pure noise to a clean image. We tracked Qwen-Image across all 28 denoising steps:</p>
+        <figure class="blog-figure"><img src="images/fig7_denoising_dynamics.png" alt="Qwen-Image across 28 denoising steps. Left/middle: attention to sinks and to text. Right: image-token activation norm." loading="lazy"><figcaption>Qwen-Image across 28 denoising steps. Left/middle: attention to sinks and to text. Right: image-token activation norm.</figcaption></figure>
+        <ul>
+        <li><strong>The same tokens are the sinks at every step.</strong> <code>&lt;|im_end|&gt;</code> is the #1 sink at 27 of 28 steps, and it and two other template tokens have among the lowest value norms at every step.</li>
+        <li><strong>Sinks are strongest at the noisiest step and fade.</strong> The top-5 sink tokens take about 29% of all attention at t=1000 and about 18% at the end. The drop happens in 58 of 60 layers.</li>
+        <li><strong>Attention to text overall falls from 36% to 21%.</strong> The noisier the input, the more the image tokens lean on the text.</li>
+        <li><strong>The image stream's massive activation follows a different curve.</strong> It grows about 10× from t=1000 to a peak around t≈460, then falls about 3× by the end. At no step does a single image token stand out (the largest token is always within 3.3× of the mean).</li>
+        </ul>
+        <p>The rise-then-fall of the activation differs from Gan et al.'s steady rise toward t=0. With one model and one prompt we don't read much into that yet; it's the first thing to check on SD3.5, the model we share with them.</p>
+        <hr />
+        <h2 id="9-smaller-observations">9. Smaller observations</h2>
+        <ul>
+        <li><strong>Not every sink is a "drain."</strong> In LLMs, sink tokens usually have tiny value vectors, so dumping attention on them does nothing. That holds for Qwen-Image's template sinks (value norm about 3× below the median). It holds partly for HunyuanVideo (its top two sinks are below the median value norm, its third above). It does <em>not</em> clearly hold for SD3.5 or Mochi, whose top sinks have ordinary value norms. Some diffusion sinks may route information rather than discard it.</li>
+        <li><strong>Revisiting a Mochi sink paper.</strong> A prior study (arXiv 2504.10317) reported that Mochi's sinks appear only in its last four layers. On Mochi's conditional pass we found sink heads throughout: 453 in layers 0–43 vs 65 in layers 44–47. The last two layers do have mostly sink heads (88% and 71%). The paper's first-frame bias partly replicates: frame 0 has 27 sink tokens, frame 1 has 3, frame 2 has 11.</li>
+        </ul>
+        <hr />
+        <h2 id="10-limitations-and-what-s-next">10. Limitations and what's next</h2>
+        <p><strong>Limitations.</strong></p>
+        <ul>
+        <li>One seed per prompt; the final denoising step only, except for the Qwen-Image sweep.</li>
+        <li>Five prompts per model: enough to show the patterns are stable, not enough to estimate how they vary.</li>
+        <li>Everything is observational. We haven't intervened on anything yet.</li>
+        </ul>
+        <p><strong>Next experiments, in priority order.</strong></p>
+        <ol>
+        <li><strong>Interventions</strong> to test whether any of this is causal:<ul>
+        <li>Zero or clamp the image stream's hot channel.</li>
+        <li>Set the gate on the hot channel to the median.</li>
+        <li>Block attention to the sink text tokens, or replace them with a fixed register.</li>
+        <li>Measure what happens to the images and videos.</li>
+        </ul>
+        </li>
+        <li><strong>A denoising sweep on SD3.5,</strong> with text-token hidden states, to compare with Gan et al. and check whether the §4 pairing holds at every timestep.</li>
+        <li><strong>More seeds per prompt,</strong> to put error bars on the numbers.</li>
+        </ol>
+        <hr />
+        <h2 id="appendix-methods">Appendix: methods</h2>
+        <ul>
+        <li><strong>Capture.</strong> For each model we recompute the attention matrix explicitly (softmax of QKᵀ/√d) for the conditional pass. We hook each block's input for the residual stream (image and text streams separately) and its adaLN module for the gate.<ul>
+        <li>HunyuanVideo's forward pass runs through the stock diffusers attention processor, including its text-padding mask. We apply the same mask when recomputing attention.</li>
+        <li>SD3.5 used classifier-free guidance at 4.5; Qwen-Image ran without it (no negative prompt).</li>
+        </ul>
+        </li>
+        <li><strong>Sink identity.</strong> Positions are mapped to tokens by re-running each pipeline's prompt template and tokenizer:<ul>
+        <li>Qwen-Image drops the first 34 template tokens.</li>
+        <li>HunyuanVideo crops the first 95.</li>
+        <li>SD3.5 concatenates 77 CLIP positions with 256 T5 positions.</li>
+        </ul>
+        </li>
+        <li><strong>Statistics.</strong> Every number and figure is computed from compact per-layer statistics (attention received per token, value norms, per-token and per-channel activation magnitudes, gate vectors) extracted from the full captures.</li>
+        </ul>
+        <p><strong>References</strong></p>
+        <ul>
+        <li>Sun et al. 2026. <em>The Spike, the Sparse and the Sink.</em></li>
+        <li>Gan et al. 2025. <em>Unleashing Diffusion Transformers for Visual Correspondence by Modulating Massive Activations.</em> NeurIPS.</li>
+        <li>Gan et al. 2026. <em>Massive Activations are the Key to Local Detail Synthesis in Diffusion Transformers.</em> ICLR.</li>
+        <li>Cheng et al. 2026. <em>Steering Video Diffusion Transformers with Massive Activations.</em></li>
+        <li>Starodubcev et al. 2026. <em>Registers Matter for Pixel-Space Diffusion Transformers.</em></li>
+        <li>arXiv 2504.10317 (attention sinks in Mochi).</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a href="../../">&larr; rohan-siva.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
