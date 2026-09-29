@@ -266,112 +266,39 @@
           </div>
         </div>
       </div>
-
-      <!-- Research blog: attention sinks in diffusion transformers -->
-      <div id="where-did-the-sink-go" class="publication-block columns is-vcentered" data-category="blog">
+      <!-- kRAIG -->
+      <div id="kraig" class="publication-block columns is-vcentered" data-category="conference">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
-              <img src="blog/where-did-the-sink-go/images/teaser.png" class="publication-teaser"
-                alt="Attention received vs text-token norm in diffusion transformers">
+              <img src="./static/images/projects/kraig/teaser.png" class="publication-teaser">
             </p>
           </div>
         </div>
         <div class="column">
           <div class="content">
             <h3 class="publication-title">
-              <a href="blog/where-did-the-sink-go/">
-                Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers
+              <a href="https://arxiv.org/abs/2603.20311">
+                kRAIG: A Natural Language-Driven Agent for Automated DataOps Pipeline Generation
               </a>
             </h3>
-            <div class="publication-venue">Research Blog</div>
+            <div class="publication-venue">NeurIPS 2026 🏆</div>
             <div class="publication-authors">
               <span class="author-block author-block-"><b>Siva, R.</b></span>,
-              <span class="author-block author-block-">Gu, X.</span>
+              <span class="author-block author-block-">Cheung, K.</span>,
+              <span class="author-block author-block-">Li, L.</span>,
+              <span class="author-block author-block-">Sundaram, G.</span>
             </div>
             <p class="publication-description">
-              In LLMs, one token is both the attention sink and the massive activation. Across SD3.5, Qwen-Image, Mochi and HunyuanVideo, both move into the text stream: the strongest sinks are the highest-norm text tokens, while image tokens carry a single shared hot channel written by the adaLN gate.
+              An AI agent that translates natural language specifications into production-ready Kubeflow Pipelines.
+              Introduces ReQuesAct to clarify user intent prior to pipeline synthesis, with retrieval-augmented tool
+              generation and LLM-based validation. Achieves a 3x improvement in extraction/loading success and 25%
+              higher transformation accuracy over state-of-the-art agentic baselines.
             </p>
             <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="blog/where-did-the-sink-go/">
-                <span class="icon"><i class="fas fa-globe-europe"></i></span>
-                <span>Blog Post</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Decagon TTS Inference Blog -->
-      <div id="decagon-tts-inference" class="publication-block columns is-vcentered" data-category="blog">
-        <div class="column is-5">
-          <div class="publication-mouse-animate publication-inner-div">
-            <p class="static" style="display: inline-block;">
-              <img src="https://cdn.prod.website-files.com/683e5da0b6d8a19de4875b10/6a874b200d7bbaffc6447388_Technology%20%26%20Research_%20Blog%20thumbnail_%20Labs%204%20(1).png" class="publication-teaser">
-            </p>
-          </div>
-        </div>
-        <div class="column">
-          <div class="content">
-            <h3 class="publication-title">
-              <a href="https://decagon.ai/blog/scaling-real-time-tts-inference">
-                Scaling Real-Time Text-to-Speech Inference
-              </a>
-            </h3>
-            <div class="publication-venue">Industry Blog</div>
-            <div class="publication-authors">
-              <span class="author-block author-block-"><b>Siva, R.</b></span>,
-              <span class="author-block author-block-">Asgari, C.</span>
-            </div>
-            <p class="publication-description">
-              Rebuilding Decagon's streaming TTS pipeline on M* with stage-aware scheduling, packed prefill, paged KV caching, and CUDA Graphs — achieving 3x lower TTFA (27 ms) and 10x higher throughput at concurrency 8 for real-time voice model inference.
-            </p>
-            <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="https://decagon.ai/blog/scaling-real-time-tts-inference">
-                <span class="icon"><i class="fas fa-globe-europe"></i></span>
-                <span>Blog Post</span>
-              </a>
-              <a class="external-link button is-small is-rounded" href="https://x.com/_rsiva/status/2090507399094575258">
-                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
-                <span>X</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Decagon TTS RL Blog -->
-      <div id="decagon-tts-rl" class="publication-block columns is-vcentered" data-category="blog">
-        <div class="column is-5">
-          <div class="publication-mouse-animate publication-inner-div">
-            <p class="static" style="display: inline-block;">
-              <img src="https://cdn.prod.website-files.com/683e5da0b6d8a19de4875b10/6a848fa9a8c4b5864039d8d0_Technology%20%26%20Research_%20Blog%20thumbnail_%20Labs%203%20(2).png" class="publication-teaser">
-            </p>
-          </div>
-        </div>
-        <div class="column">
-          <div class="content">
-            <h3 class="publication-title">
-              <a href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">
-                Teaching Flow-Matching Text-to-Speech Models with RL
-              </a>
-            </h3>
-            <div class="publication-venue">Industry Blog</div>
-            <div class="publication-authors">
-              <span class="author-block author-block-"><b>Siva, R.</b></span>,
-              <span class="author-block author-block-">Asgari, C.</span>
-            </div>
-            <p class="publication-description">
-              Flow-matching TTS architectures lack standard open-source RL post-training support. We design a specialized RL framework (GRPO/PPO) for continuous flow-matching models, eliminating acoustic artifacts and tightening sample distribution variance.
-            </p>
-            <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">
-                <span class="icon"><i class="fas fa-globe-europe"></i></span>
-                <span>Blog Post</span>
-              </a>
-              <a class="external-link button is-small is-rounded" href="https://x.com/_rsiva/status/2088323155693850648">
-                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
-                <span>X</span>
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2603.20311">
+                <span class=" icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
               </a>
             </div>
           </div>
@@ -542,39 +469,111 @@
         </div>
       </div>
 
-      <!-- kRAIG -->
-      <div id="kraig" class="publication-block columns is-vcentered" data-category="preprint">
+      <!-- Research blog: attention sinks in diffusion transformers -->
+      <div id="where-did-the-sink-go" class="publication-block columns is-vcentered" data-category="blog">
         <div class="column is-5">
           <div class="publication-mouse-animate publication-inner-div">
             <p class="static" style="display: inline-block;">
-              <img src="./static/images/projects/kraig/teaser.png" class="publication-teaser">
+              <img src="blog/where-did-the-sink-go/images/teaser.png" class="publication-teaser"
+                alt="Attention received vs text-token norm in diffusion transformers">
             </p>
           </div>
         </div>
         <div class="column">
           <div class="content">
             <h3 class="publication-title">
-              <a href="https://arxiv.org/abs/2603.20311">
-                kRAIG: A Natural Language-Driven Agent for Automated DataOps Pipeline Generation
+              <a href="blog/where-did-the-sink-go/">
+                Where Did the Sink Go? Attention Sinks and Massive Activations in Text-to-Image and Video Diffusion Transformers
               </a>
             </h3>
-            <div class="publication-venue">Under Submission</div>
+            <div class="publication-venue">Research Blog</div>
             <div class="publication-authors">
               <span class="author-block author-block-"><b>Siva, R.</b></span>,
-              <span class="author-block author-block-">Cheung, K.</span>,
-              <span class="author-block author-block-">Li, L.</span>,
-              <span class="author-block author-block-">Sundaram, G.</span>
+              <span class="author-block author-block-">Gu, X.</span>
             </div>
             <p class="publication-description">
-              An AI agent that translates natural language specifications into production-ready Kubeflow Pipelines.
-              Introduces ReQuesAct to clarify user intent prior to pipeline synthesis, with retrieval-augmented tool
-              generation and LLM-based validation. Achieves a 3x improvement in extraction/loading success and 25%
-              higher transformation accuracy over state-of-the-art agentic baselines.
+              In LLMs, one token is both the attention sink and the massive activation. Across SD3.5, Qwen-Image, Mochi and HunyuanVideo, both move into the text stream: the strongest sinks are the highest-norm text tokens, while image tokens carry a single shared hot channel written by the adaLN gate.
             </p>
             <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2603.20311">
-                <span class=" icon"><i class="ai ai-arxiv"></i></span>
-                <span>arXiv</span>
+              <a class="external-link button is-small is-rounded" href="blog/where-did-the-sink-go/">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Blog Post</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decagon TTS Inference Blog -->
+      <div id="decagon-tts-inference" class="publication-block columns is-vcentered" data-category="blog">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <p class="static" style="display: inline-block;">
+              <img src="https://cdn.prod.website-files.com/683e5da0b6d8a19de4875b10/6a874b200d7bbaffc6447388_Technology%20%26%20Research_%20Blog%20thumbnail_%20Labs%204%20(1).png" class="publication-teaser">
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://decagon.ai/blog/scaling-real-time-tts-inference">
+                Scaling Real-Time Text-to-Speech Inference
+              </a>
+            </h3>
+            <div class="publication-venue">Industry Blog</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Asgari, C.</span>
+            </div>
+            <p class="publication-description">
+              Rebuilding Decagon's streaming TTS pipeline on M* with stage-aware scheduling, packed prefill, paged KV caching, and CUDA Graphs — achieving 3x lower TTFA (27 ms) and 10x higher throughput at concurrency 8 for real-time voice model inference.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://decagon.ai/blog/scaling-real-time-tts-inference">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Blog Post</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://x.com/_rsiva/status/2090507399094575258">
+                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
+                <span>X</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decagon TTS RL Blog -->
+      <div id="decagon-tts-rl" class="publication-block columns is-vcentered" data-category="blog">
+        <div class="column is-5">
+          <div class="publication-mouse-animate publication-inner-div">
+            <p class="static" style="display: inline-block;">
+              <img src="https://cdn.prod.website-files.com/683e5da0b6d8a19de4875b10/6a848fa9a8c4b5864039d8d0_Technology%20%26%20Research_%20Blog%20thumbnail_%20Labs%203%20(2).png" class="publication-teaser">
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">
+                Teaching Flow-Matching Text-to-Speech Models with RL
+              </a>
+            </h3>
+            <div class="publication-venue">Industry Blog</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-"><b>Siva, R.</b></span>,
+              <span class="author-block author-block-">Asgari, C.</span>
+            </div>
+            <p class="publication-description">
+              Flow-matching TTS architectures lack standard open-source RL post-training support. We design a specialized RL framework (GRPO/PPO) for continuous flow-matching models, eliminating acoustic artifacts and tightening sample distribution variance.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://decagon.ai/blog/teaching-flow-matching-tts-with-rl">
+                <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                <span>Blog Post</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://x.com/_rsiva/status/2088323155693850648">
+                <span class="icon"><i class="fa-brands fa-x-twitter"></i></span>
+                <span>X</span>
               </a>
             </div>
           </div>
